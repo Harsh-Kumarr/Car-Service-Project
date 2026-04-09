@@ -59,8 +59,8 @@ An AI-powered full-stack automobile service and diagnostics platform.
 
 ### 1️⃣ Clone Repository
 ```bash
-git clone <your-repository-url>
-cd <repository-name>
+git clone https://github.com/Harsh-Kumarr/Car-Service-Project.git
+cd Car-Service-Project
 ```
 
 ### 2️⃣ Backend Setup
