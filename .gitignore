@@ -1,0 +1,35 @@
+# 🔐 ENV FILES
+.env
+.env.*
+smart-auto-backend/.env
+
+# 📦 NODE MODULES
+node_modules/
+frontend/node_modules/
+smart-auto-backend/node_modules/
+
+# 🏗 BUILD FILES
+dist/
+build/
+frontend/dist/
+
+# 🧾 LOG FILES
+*.log
+logs/
+
+# 💻 OS FILES
+.DS_Store
+Thumbs.db
+
+# 🧪 TEST
+coverage/
+
+# 🔥 VITE CACHE
+.vite/
+
+# 🔑 SECRET KEYS
+*.pem
+
+# 🚫 MISC
+.idea/
+.vscode/
