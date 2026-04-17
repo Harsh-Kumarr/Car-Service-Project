@@ -3,6 +3,7 @@ import { diagnoseIssue } from "../aiServices";
 import ChatBox from "../components/ChatBox";
 import ResultCard from "../components/ResultCard";
 import toast from "react-hot-toast";
+import { GiRobotGolem } from "react-icons/gi";
 
 const Diagnose = () => {
   const [input, setInput] = useState("");
@@ -25,7 +26,9 @@ const Diagnose = () => {
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <div>
-        <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">AI Vehicle Diagnosis 🤖</h2>
+        <h2 className="text-3xl inline-flex items-center gap-2 font-extrabold text-gray-900 tracking-tight">AI Vehicle Diagnosis <GiRobotGolem />
+
+</h2>
         <p className="text-gray-500 mt-1">Describe your vehicle's issue and let AI help diagnose it.</p>
       </div>
 

@@ -5,6 +5,8 @@ import Button from "../../../components/ui/Button";
 import toast from "react-hot-toast";
 import useVehicleStore from "../vehicleStore";
 import { useNavigate } from "react-router-dom";
+import { IoCarSportOutline } from "react-icons/io5";
+
 
 const AddVehicle = () => {
   const navigate = useNavigate();
@@ -27,7 +29,7 @@ const AddVehicle = () => {
     <div className="max-w-3xl mx-auto">
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-10">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">Add Vehicle 🚗</h2>
+          <h2 className="text-3xl inline-flex items-center gap-2 font-extrabold text-gray-900 tracking-tight">Add Vehicle <IoCarSportOutline /></h2>
           <p className="text-gray-500 mt-1">Enter the details of your vehicle and owner information.</p>
         </div>
 
@@ -35,7 +37,7 @@ const AddVehicle = () => {
           {/* VEHICLE DETAILS */}
           <div>
             <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-sm">🚗</span>
+              <span className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-sm"><IoCarSportOutline /></span>
               Vehicle Details
             </h3>
             <div className="grid md:grid-cols-2 gap-4">

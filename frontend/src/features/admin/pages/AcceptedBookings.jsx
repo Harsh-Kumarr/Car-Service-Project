@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAllBookings } from "../adminService";
 import AssignModal from "./AssignModal";
+import { BsCalendarDay } from "react-icons/bs";
 
 const AcceptedBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -34,8 +35,8 @@ const AcceptedBookings = () => {
 
       <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-xl mb-3">🛠 {b.serviceType}</p>
 
-      <p className="text-xs text-gray-400 font-medium mb-4">
-        📅 {new Date(b.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+      <p className="text-xs inline-flex items-center gap-2 text-gray-400 font-medium mb-4">
+        <BsCalendarDay /> {new Date(b.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
       </p>
 
       <div className="flex gap-2 flex-wrap">

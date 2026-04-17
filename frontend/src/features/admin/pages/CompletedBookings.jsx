@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllBookings } from "../adminService";
+import { BsCalendarDay } from "react-icons/bs";
 
 const CompletedBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -31,8 +32,8 @@ const CompletedBookings = () => {
 
       <p className="text-sm text-gray-600 bg-white p-3 rounded-xl mb-3 border border-emerald-50">🛠 {b.serviceType}</p>
 
-      <p className="text-xs text-gray-400 font-medium">
-        📅 Completed: {new Date(b.updatedAt || b.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+      <p className="text-xs inline-flex items-center gap-2 text-gray-400 font-medium">
+        <BsCalendarDay /> Completed: {new Date(b.updatedAt || b.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
       </p>
     </div>
   );

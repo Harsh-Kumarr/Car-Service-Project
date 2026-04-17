@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getMyBookings } from "../bookingService";
 import { Link } from "react-router-dom";
+import { BsCalendarDay } from "react-icons/bs";
 
 const statusColor = (status) => {
   const map = {
@@ -27,7 +28,8 @@ const MyBookings = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">My Bookings 📋</h2>
+        <h2 className="text-3xl inline-flex items-center gap-2 font-extrabold text-gray-900 tracking-tight">My Bookings <BsCalendarDay />
+</h2>
         <p className="text-gray-500 mt-1">Track the status of all your service bookings.</p>
       </div>
 
@@ -70,8 +72,8 @@ const MyBookings = () => {
               )}
 
               <div className="flex items-center justify-between mt-4">
-                <p className="text-xs text-gray-400 font-medium">
-                  📅 {new Date(b.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+                <p className="text-xs inline-flex items-center gap-2 text-gray-400 font-medium">
+                  <BsCalendarDay /> {new Date(b.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
                 </p>
 
                 {/* PAYMENT BUTTON — show when completed & not yet paid */}

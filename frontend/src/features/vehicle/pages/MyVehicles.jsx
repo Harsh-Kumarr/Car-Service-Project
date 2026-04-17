@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import useVehicleStore from "../vehicleStore";
+import { IoCarSportOutline } from "react-icons/io5";
+
 
 const MyVehicles = () => {
   const vehicles = useVehicleStore((state) => state.vehicles);
@@ -12,7 +14,7 @@ const MyVehicles = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">My Vehicles 🚗</h2>
+        <h2 className="text-3xl inline-flex items-center gap-2 font-extrabold text-gray-900 tracking-tight">My Vehicles <IoCarSportOutline /></h2>
         <p className="text-gray-500 mt-1">Manage your registered vehicles below.</p>
       </div>
 
@@ -27,7 +29,7 @@ const MyVehicles = () => {
             <div key={v._id} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-all group">
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                  🚗
+                  <IoCarSportOutline />
                 </div>
                 <div>
                   <p className="font-bold text-gray-900 text-lg">{v.brand}</p>

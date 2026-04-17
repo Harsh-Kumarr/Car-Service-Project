@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import { getMyBookings } from "../../booking/bookingService";
 import { getVehicles } from "../../vehicle/vehicleService";
 import { Link } from "react-router-dom";
+import { IoCarSportOutline } from "react-icons/io5";
+import { BsTools } from "react-icons/bs";
+import { BsCalendarDay } from "react-icons/bs";
+
 
 const Dashboard = () => {
   const [bookings, setBookings] = useState([]);
@@ -41,9 +45,9 @@ const Dashboard = () => {
   }
 
   const statCards = [
-    { title: "Total Vehicles", value: vehicles.length, icon: "🚗", color: "from-blue-500 to-indigo-500" },
-    { title: "Total Bookings", value: bookings.length, icon: "📋", color: "from-emerald-500 to-teal-500" },
-    { title: "Active Services", value: bookings.filter(b => b.status !== "completed").length, icon: "🔧", color: "from-orange-500 to-amber-500" },
+    { title: "Total Vehicles", value: vehicles.length, icon: <IoCarSportOutline />, color: "from-blue-500 to-indigo-500" },
+    { title: "Total Bookings", value: bookings.length, icon: <BsCalendarDay />, color: "from-emerald-500 to-teal-500" },
+    { title: "Active Services", value: bookings.filter(b => b.status !== "completed").length, icon: <BsTools />, color: "from-orange-500 to-amber-500" },
   ];
 
   const statusColor = (status) => {
@@ -59,8 +63,8 @@ const Dashboard = () => {
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">
-          Welcome to Dashboard 🚗
+        <h2 className="text-3xl inline-flex items-center gap-2 font-extrabold text-gray-900 tracking-tight">
+          Welcome to Dashboard <IoCarSportOutline />
         </h2>
         <p className="text-gray-500 mt-1">Here's an overview of your vehicles and services.</p>
       </div>

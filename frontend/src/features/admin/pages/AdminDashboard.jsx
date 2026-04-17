@@ -3,6 +3,10 @@ import useAdminStore from "../adminStore";
 import StatCard from "../components/StatCard";
 import RevenueChart from "../components/RevenueChart";
 import IssueChart from "../components/IssueChart";
+import { BsCalendarDay } from "react-icons/bs";
+import { FaChartPie } from "react-icons/fa6";
+import { GiTakeMyMoney } from "react-icons/gi";
+import { IoShieldCheckmarkSharp } from "react-icons/io5";
 
 const AdminDashboard = () => {
   const { stats, fetchStats } = useAdminStore();
@@ -18,16 +22,17 @@ const AdminDashboard = () => {
   ];
 
   const statCards = [
-    { title: "Total Bookings", value: stats.totalBookings, icon: "📋", color: "from-blue-500 to-indigo-500" },
-    { title: "Completed", value: stats.completed, icon: "✅", color: "from-emerald-500 to-teal-500" },
-    { title: "Revenue", value: `₹${stats.totalRevenue}`, icon: "💰", color: "from-purple-500 to-violet-500" },
+    { title: "Total Bookings", value: stats.totalBookings, icon: <BsCalendarDay />, color: "from-blue-500 to-indigo-500" },
+    { title: "Completed", value: stats.completed, icon: <IoShieldCheckmarkSharp />, color: "from-emerald-500 to-teal-500" },
+    { title: "Revenue", value: `₹${stats.totalRevenue}`, icon: <GiTakeMyMoney />, color: "from-purple-500 to-violet-500" },
   ];
 
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">
-          Admin Dashboard 📊
+        <h2 className="text-3xl font-extrabold inline-flex items-center gap-2 text-gray-900 tracking-tight">
+          Admin Dashboard <FaChartPie />
+
         </h2>
         <p className="text-gray-500 mt-1">Analytics overview of all bookings and revenue.</p>
       </div>
