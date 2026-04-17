@@ -95,8 +95,6 @@ const AppRoutes = () => {
                     <Route path="/mechanic/job/:id" element={<JobDetails />} />
                 </Route>
 
-
-
                 {/* 404 */}
                 <Route path="*" element={<NotFound />} />
             </Routes>

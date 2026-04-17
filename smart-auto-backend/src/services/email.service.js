@@ -1,27 +1,3 @@
-// import nodemailer from "nodemailer";
-// import { env } from "../config/env.js";
-
-// const transporter = nodemailer.createTransport({
-//   service: "gmail",
-//   auth: {
-//     user: env.EMAIL_USER,
-//     pass: env.EMAIL_PASS,
-//   },
-// });
-
-// export const sendEmail = async (to, subject, html) => {
-//   if (!env.EMAIL_USER || !env.EMAIL_PASS) {
-//     throw new Error("Email credentials missing in env");
-//   }
-
-//   await transporter.sendMail({
-//     from: `"Smart Auto" <${env.EMAIL_USER}>`,
-//     to,
-//     subject,
-//     html,
-//   });
-// };
-
 
 import nodemailer from "nodemailer";
 import { env } from "../config/env.js";
