@@ -49,7 +49,10 @@ const Sidebar = () => {
         {user?.role === "admin" && (
           <>
             <NavLink to="/admin/dashboard">Admin Overview</NavLink>
-            <NavLink to="/admin/bookings">All Bookings</NavLink>
+            <NavLink to="/admin/bookings">Pending/All</NavLink>
+            <NavLink to="/admin/bookings/accepted">Accepted</NavLink>
+            <NavLink to="/admin/bookings/completed">Completed</NavLink>
+            <NavLink to="/admin/bookings/rejected">Rejected</NavLink>
           </>
         )}
 

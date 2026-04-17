@@ -70,7 +70,7 @@ const AllBookings = () => {
       <div className="flex justify-between items-start mb-3">
         <div>
           <h3 className="text-lg font-bold text-gray-900">
-            🚗 {b.vehicleId?.brand} {b.vehicleId?.model}
+            {b.vehicleId?.brand} {b.vehicleId?.model}
           </h3>
           <p className="text-sm text-gray-500">👤 {b.userId?.name}</p>
         </div>

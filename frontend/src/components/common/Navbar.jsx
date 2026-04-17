@@ -21,7 +21,7 @@ const Navbar = () => {
         
         <button 
           onClick={() => setShowLogoutModal(true)} 
-          className="text-red-500 hover:text-white hover:bg-red-500 font-bold px-5 py-2 rounded-xl transition-all duration-200 hover:-translate-y-0.5 active:scale-95 shadow-sm border border-red-100"
+          className="text-mauve-800 hover:text-white hover:bg-red-500 font-bold px-5 py-2 rounded-xl transition-all duration-200 hover:-translate-y-0.5 active:scale-95 shadow-sm border border-red-100"
         >
           Logout
         </button>
@@ -31,9 +31,9 @@ const Navbar = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
           <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             <div className="p-6 text-center">
-              <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4">
+              {/* <div className="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-3xl">👋</span>
-              </div>
+              </div> */}
               <h3 className="text-xl font-bold text-gray-900 mb-2">Ready to leave?</h3>
               <p className="text-gray-500 text-sm">
                 Are you sure you want to log out of your account?
@@ -49,7 +49,7 @@ const Navbar = () => {
               </button>
               <button
                 onClick={handleLogout}
-                className="flex-1 px-4 py-2.5 bg-red-500 text-white font-semibold rounded-xl hover:bg-red-600 transition-colors shadow-sm active:scale-95"
+                className="flex-1 px-4 py-2.5 bg-mauve-800 text-white font-semibold rounded-xl hover:bg-red-600 transition-colors shadow-sm active:scale-95"
               >
                 Yes, Logout
               </button>

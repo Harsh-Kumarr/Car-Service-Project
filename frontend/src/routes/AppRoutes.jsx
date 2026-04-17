@@ -26,6 +26,9 @@ import CreateBooking from "../features/booking/pages/CreateBooking";
 import AdminDashboard from "../features/admin/pages/AdminDashboard";
 import AllBookings from "../features/admin/pages/AllBookings";
 import AssignMechanic from "../features/admin/pages/AssignMechanic";
+import AcceptedBookings from "../features/admin/pages/AcceptedBookings";
+import RejectedBookings from "../features/admin/pages/RejectedBookings";
+import CompletedBookings from "../features/admin/pages/CompletedBookings";
 
 // MECHANIC
 import MechanicJobs from "../features/mechanic/pages/MechanicJobs";
@@ -80,6 +83,9 @@ const AppRoutes = () => {
                 >
                     <Route path="/admin/dashboard" element={<AdminDashboard />} />
                     <Route path="/admin/bookings" element={<AllBookings />} />
+                    <Route path="/admin/bookings/accepted" element={<AcceptedBookings />} />
+                    <Route path="/admin/bookings/rejected" element={<RejectedBookings />} />
+                    <Route path="/admin/bookings/completed" element={<CompletedBookings />} />
                     <Route path="/admin/assign" element={<AssignMechanic />} />
                 </Route>
 
