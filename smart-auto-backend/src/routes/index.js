@@ -7,6 +7,7 @@ import mechanicRoutes from "../modules/mechanic/mechanic.routes.js";
 import adminRoutes from "../modules/admin/admin.routes.js";
 import paymentRoutes from "../modules/payment/payment.routes.js";
 import aiRoutes from "../modules/ai/ai.routes.js";
+import reviewRoutes from "../modules/review/review.routes.js";
 
 const router = express.Router();
 
@@ -28,6 +29,9 @@ router.use("/mechanic", mechanicRoutes);
 // 💳 PAYMENT
 router.use("/payment", paymentRoutes);
 router.use("/ai", aiRoutes);
+
+// ⭐ REVIEWS
+router.use("/reviews", reviewRoutes);
 
 // ❤️ HEALTH CHECK
 router.get("/health", (req, res) => {

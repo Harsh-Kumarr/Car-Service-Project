@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
-import Booking from "./booking.model.js";
-import ServiceLog from "./serviceLog.model.js";
+import Booking from "../../models/booking.model.js";
+import ServiceLog from "../../models/serviceLog.model.js";
 import AppError from "../../utils/AppError.js";
 import { canTransition } from "./booking.utils.js";
 
 // ✅ Email imports (you had them separately)
 import { sendEmail } from "../../services/email.service.js";
 import { serviceCompletedTemplate } from "../../utils/emailTemplates.js";
-import User from "../auth/auth.model.js";
+import User from "../../models/auth.model.js";
 import { sendServiceCompletedNotification } from "../../events/notification.events.js";
 
 

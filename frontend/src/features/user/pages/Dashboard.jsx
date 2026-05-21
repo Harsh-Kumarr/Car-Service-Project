@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { getMyBookings } from "../../booking/bookingService";
 import { getVehicles } from "../../vehicle/vehicleService";
 import { Link } from "react-router-dom";
@@ -6,6 +6,18 @@ import { IoCarSportOutline } from "react-icons/io5";
 import { BsTools } from "react-icons/bs";
 import { BsCalendarDay } from "react-icons/bs";
 
+
+// Color palette for service type chart bars
+const CHART_COLORS = [
+  { bg: "bg-blue-500", light: "bg-blue-100", text: "text-blue-700" },
+  { bg: "bg-emerald-500", light: "bg-emerald-100", text: "text-emerald-700" },
+  { bg: "bg-amber-500", light: "bg-amber-100", text: "text-amber-700" },
+  { bg: "bg-purple-500", light: "bg-purple-100", text: "text-purple-700" },
+  { bg: "bg-rose-500", light: "bg-rose-100", text: "text-rose-700" },
+  { bg: "bg-cyan-500", light: "bg-cyan-100", text: "text-cyan-700" },
+  { bg: "bg-orange-500", light: "bg-orange-100", text: "text-orange-700" },
+  { bg: "bg-indigo-500", light: "bg-indigo-100", text: "text-indigo-700" },
+];
 
 const Dashboard = () => {
   const [bookings, setBookings] = useState([]);
@@ -29,6 +41,27 @@ const Dashboard = () => {
     };
     fetchData();
   }, []);
+
+  // Compute service type distribution
+  const serviceTypeData = useMemo(() => {
+    const counts = {};
+    bookings.forEach((b) => {
+      const type = b.serviceType || "Other";
+      counts[type] = (counts[type] || 0) + 1;
+    });
+
+    const sorted = Object.entries(counts)
+      .map(([type, count]) => ({ type, count }))
+      .sort((a, b) => b.count - a.count);
+
+    const max = sorted.length > 0 ? sorted[0].count : 1;
+    return sorted.map((item, i) => ({
+      ...item,
+      pct: Math.round((item.count / bookings.length) * 100),
+      barWidth: Math.round((item.count / max) * 100),
+      color: CHART_COLORS[i % CHART_COLORS.length],
+    }));
+  }, [bookings]);
 
   if (loading) {
     return (
@@ -79,6 +112,52 @@ const Dashboard = () => {
             <p className="text-3xl font-extrabold text-gray-900 mt-1">{s.value}</p>
           </div>
         ))}
+      </div>
+
+      {/* SERVICE TYPE CHART */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div className="px-6 py-5 border-b border-gray-100 flex items-center justify-between">
+          <div>
+            <h3 className="text-lg font-bold text-gray-900">Service Type Breakdown</h3>
+            <p className="text-xs text-gray-400 mt-0.5">Distribution of your booked service types</p>
+          </div>
+          <span className="text-xs font-bold text-gray-400 bg-gray-50 px-3 py-1 rounded-full">
+            {bookings.length} total
+          </span>
+        </div>
+
+        {serviceTypeData.length === 0 ? (
+          <div className="p-8 text-center text-gray-400">
+            <p className="text-4xl mb-2">📊</p>
+            <p className="font-medium">No service data yet</p>
+            <p className="text-sm mt-1">Book a service to see your breakdown here.</p>
+          </div>
+        ) : (
+          <div className="p-6 space-y-4">
+            {serviceTypeData.map((item, i) => (
+              <div key={item.type} className="group" style={{ animationDelay: `${i * 60}ms` }}>
+                <div className="flex items-center justify-between mb-1.5">
+                  <div className="flex items-center gap-2">
+                    <span className={`w-2.5 h-2.5 rounded-full ${item.color.bg}`}></span>
+                    <span className="text-sm font-semibold text-gray-800">{item.type}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${item.color.light} ${item.color.text}`}>
+                      {item.count} booking{item.count > 1 ? "s" : ""}
+                    </span>
+                    <span className="text-xs font-bold text-gray-400 w-10 text-right">{item.pct}%</span>
+                  </div>
+                </div>
+                <div className="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
+                  <div
+                    className={`h-full rounded-full ${item.color.bg} transition-all duration-700 ease-out`}
+                    style={{ width: `${item.barWidth}%` }}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* RECENT BOOKINGS */}

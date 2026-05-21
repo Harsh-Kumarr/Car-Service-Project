@@ -2,9 +2,9 @@ import Razorpay from "razorpay";
 import crypto from "crypto";
 import { sendEmail } from "../../services/email.service.js";
 import { paymentSuccessTemplate } from "../../utils/emailTemplates.js";
-import User from "../auth/auth.model.js";
-import Booking from "../booking/booking.model.js";
-import Invoice from "./invoice.model.js";
+import User from "../../models/auth.model.js";
+import Booking from "../../models/booking.model.js";
+import Invoice from "../../models/invoice.model.js";
 import AppError from "../../utils/AppError.js";
 import { sendPaymentSuccessNotification } from "../../events/notification.events.js";
 

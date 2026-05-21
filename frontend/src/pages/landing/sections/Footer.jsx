@@ -103,7 +103,7 @@ const Footer = () => {
               <p className="text-sm leading-7 text-gray-500 italic">
                 Sector 17, Intelligence Hub,<br />
                 Chandigarh, Punjab 160017<br />
-                <span className="text-blue-400 mt-2 block font-mono">contact@autoai.tech</span>
+                <span className="text-blue-400 mt-2 block font-mono">harshhkumarr0@gmail.com</span>
               </p>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import Booking from "../booking/booking.model.js";
+import Booking from "../../models/booking.model.js";
 import AppError from "../../utils/AppError.js";
 import bookingService from "../booking/booking.service.js";
 

@@ -46,7 +46,7 @@ Respond ONLY in JSON format:
 
       // SMART LOCAL MOCK AI (works without API key)
       const issueLower = issue.toLowerCase();
-      
+
       let mockResponse = {
         causes: ["General wear and tear", "Requires physical inspection"],
         costEstimate: 1500,
