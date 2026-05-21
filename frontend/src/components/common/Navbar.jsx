@@ -2,6 +2,8 @@ import useAuthStore from "../../features/auth/authStore";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import api from "../../services/api";
+import { MdOutlineReviews } from "react-icons/md";
+
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -108,14 +110,15 @@ const Navbar = () => {
               onClick={() => setShowReviewModal(true)}
               className="group relative inline-flex items-center gap-2 px-5 py-2 rounded-xl font-bold text-sm transition-all duration-200 hover:-translate-y-0.5 active:scale-95 shadow-sm border border-amber-200 bg-gradient-to-r from-amber-50 to-yellow-50 text-amber-700 hover:from-amber-100 hover:to-yellow-100 hover:shadow-md hover:shadow-amber-100/50"
             >
-              <span className="text-base transition-transform duration-300 group-hover:rotate-[20deg]">⭐</span>
-              Write a Review
+              <span className="text-base transition-transform duration-300 group-hover:rotate-[20deg]"><MdOutlineReviews />
+</span>
+              Review
             </button>
           )}
 
           <button 
             onClick={() => setShowLogoutModal(true)} 
-            className="text-mauve-800 hover:text-white hover:bg-red-500 font-bold px-5 py-2 rounded-xl transition-all duration-200 hover:-translate-y-0.5 active:scale-95 shadow-sm border border-red-100"
+            className="text-mauve-800 hover:text-white hover:bg-black font-bold px-5 py-2 rounded-xl transition-all duration-200 hover:-translate-y-0.5 active:scale-95 shadow-sm border border-red-100"
           >
             Logout
           </button>

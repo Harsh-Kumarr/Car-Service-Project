@@ -40,14 +40,14 @@ const AddVehicle = () => {
               <span className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-sm"><IoCarSportOutline /></span>
               Vehicle Details
             </h3>
-            <div className="grid md:grid-cols-2 gap-4">
-              <Input label="Registration Number *" name="registrationNumber" register={register} errors={errors} placeholder="e.g. PB10AB1234" />
+            <div className="grid md:grid-cols-2 gap-4 ">
+              <Input label="Registration Number *" name="registrationNumber" register={register} errors={errors} placeholder="e.g. PB10AB1234 " />
               <Input label="Year *" name="year" register={register} errors={errors} placeholder="e.g. 2022" />
               <Input label="Brand *" name="brand" register={register} errors={errors} placeholder="e.g. Hyundai" />
-              <Input label="Model *" name="model" register={register} errors={errors} placeholder="e.g. Creta" />
+              <Input label="Model *" name="model" register={register} errors={errors} placeholder="e.g. Creta" className="shadow-[inset_0_2px_8px_rgba(0,0,0,0.20)]"/>
               <div>
                 <label className="block mb-1 text-sm font-medium text-gray-700">Fuel Type</label>
-                <select {...register("fuelType")} className="w-full border border-gray-200 bg-gray-50 p-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                <select {...register("fuelType")} className="w-full shadow-[inset_0_2px_8px_rgba(0,0,0,0.20)] bg-gray-50 p-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
                   <option value="">Select Fuel</option>
                   <option value="petrol">Petrol</option>
                   <option value="diesel">Diesel</option>

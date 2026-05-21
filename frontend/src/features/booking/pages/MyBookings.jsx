@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { getMyBookings } from "../bookingService";
 import { Link } from "react-router-dom";
 import { BsCalendarDay } from "react-icons/bs";
+import { PiMailboxFill } from "react-icons/pi";
+
 
 const statusColor = (status) => {
   const map = {
@@ -35,7 +37,8 @@ const MyBookings = () => {
 
       {bookings.length === 0 ? (
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-12 text-center">
-          <span className="text-5xl mb-4 block">📭</span>
+          <span className="text-5xl mb-4 flex justify-center "><PiMailboxFill />
+</span>
           <p className="text-gray-500 font-medium">No bookings yet. Book your first service!</p>
         </div>
       ) : (

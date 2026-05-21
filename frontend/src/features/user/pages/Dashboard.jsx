@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { IoCarSportOutline } from "react-icons/io5";
 import { BsTools } from "react-icons/bs";
 import { BsCalendarDay } from "react-icons/bs";
+import { BsDatabaseSlash } from "react-icons/bs";
+
 
 
 // Color palette for service type chart bars
@@ -128,7 +130,7 @@ const Dashboard = () => {
 
         {serviceTypeData.length === 0 ? (
           <div className="p-8 text-center text-gray-400">
-            <p className="text-4xl mb-2">📊</p>
+            <p className="text-4xl mb-2 flex justify-center"><BsDatabaseSlash /></p>
             <p className="font-medium">No service data yet</p>
             <p className="text-sm mt-1">Book a service to see your breakdown here.</p>
           </div>

@@ -20,7 +20,7 @@ const MyVehicles = () => {
 
       {vehicles.length === 0 ? (
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-12 text-center">
-          <span className="text-5xl mb-4 block">🚙</span>
+          <span className="text-5xl mb-4 flex justify-center "><IoCarSportOutline /></span>
           <p className="text-gray-500 font-medium">No vehicles found. Add your first vehicle!</p>
         </div>
       ) : (
