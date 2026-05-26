@@ -12,6 +12,8 @@ export const bookingSchema = z.object({
   vehicleId: z.string(),
   serviceType: z.string().min(2),
   issueDescription: z.string().optional(),
+  scheduledDate: z.string().min(1, "Scheduled date is required"),
+  scheduledTime: z.string().min(1, "Scheduled time is required"),
 });
 
 export const loginSchema = z.object({

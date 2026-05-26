@@ -1,4 +1,4 @@
-import Review from "../../models/review.model.js";
+import { Review } from "../../models/models.js";
 import AppError from "../../utils/AppError.js";
 
 class ReviewService {

@@ -1,10 +1,8 @@
-import Booking from "../../models/booking.model.js";
-import User from "../../models/auth.model.js";
+import { Booking, User, Invoice } from "../../models/models.js";
 import AppError from "../../utils/AppError.js";
 import bookingService from "../booking/booking.service.js";
 import { sendEmail } from "../../services/email.service.js";
 import { bookingAcceptedTemplate, bookingRejectedTemplate } from "../../utils/emailTemplates.js";
-import Invoice from "../../models/invoice.model.js";
 import { sendBookingAcceptedNotification } from "../../events/notification.events.js";
 
 

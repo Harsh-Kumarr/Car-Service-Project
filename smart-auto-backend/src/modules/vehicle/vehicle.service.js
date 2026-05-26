@@ -1,4 +1,4 @@
-import Vehicle from "../../models/vehicle.model.js";
+import { Vehicle } from "../../models/models.js";
 import AppError from "../../utils/AppError.js";
 
 class VehicleService {

@@ -1,7 +1,7 @@
 import authService from "./auth.service.js";
 import crypto from "crypto";
 import bcrypt from "bcryptjs";
-import User from "../../models/auth.model.js";
+import { User } from "../../models/models.js";
 import { sendEmail } from "../../services/email.service.js";
 export const register = async (req, res, next) => {
   try {

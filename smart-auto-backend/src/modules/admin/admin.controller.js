@@ -1,4 +1,4 @@
-import User from "../../models/auth.model.js";
+import { User } from "../../models/models.js";
 import adminService from "./admin.service.js";
 
 // GET ALL BOOKINGS

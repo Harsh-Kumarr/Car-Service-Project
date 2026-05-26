@@ -36,9 +36,9 @@ const Login = () => {
       setAuth({ token, user });
       toast.success("Welcome back!", { id: toastId });
 
-      if (user.role === "admin") navigate("/admin/dashboard");
-      else if (user.role === "mechanic") navigate("/mechanic/jobs");
-      else navigate("/dashboard");
+      if (user.role === "admin") navigate("/admin/dashboard", { replace: true });
+      else if (user.role === "mechanic") navigate("/mechanic/jobs", { replace: true });
+      else navigate("/dashboard", { replace: true });
     } catch (err) {
       const message = err.response?.data?.message || "Invalid credentials";
       setApiError(message);

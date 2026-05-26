@@ -81,8 +81,19 @@ const AllBookings = () => {
 
       <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-xl mb-3">🛠 {b.serviceType}</p>
 
+      {/* SCHEDULED APPOINTMENT */}
+      {b.scheduledDate && (
+        <div className="flex items-center gap-2 mb-3 bg-indigo-50 border border-indigo-100 rounded-xl px-3 py-2">
+          <span className="text-sm">📅</span>
+          <p className="text-xs font-bold text-indigo-800">
+            {new Date(b.scheduledDate).toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short", year: "numeric" })}
+            {b.scheduledTime && <span className="ml-1 text-indigo-600">at {b.scheduledTime}</span>}
+          </p>
+        </div>
+      )}
+
       <p className="text-xs text-gray-400 font-medium mb-4">
-        📅 {new Date(b.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+        🕐 Booked on {new Date(b.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
       </p>
 
       <div className="flex gap-2 flex-wrap">

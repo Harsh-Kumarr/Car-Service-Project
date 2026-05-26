@@ -23,7 +23,10 @@ const MyBookings = () => {
 
   useEffect(() => {
     getMyBookings().then((res) => {
-      setBookings(res.data.bookings || []);
+      const sorted = (res.data.bookings || []).sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
+      setBookings(sorted);
     });
   }, []);
 
@@ -61,6 +64,20 @@ const MyBookings = () => {
                 {b.issueDescription || b.serviceType || "No description"}
               </p>
 
+              {/* SCHEDULED DATE/TIME */}
+              {b.scheduledDate && (
+                <div className="mt-3 flex items-center gap-2 bg-indigo-50 border border-indigo-100 rounded-xl px-4 py-2.5" style={{ animation: "fadeSlideIn 0.25s ease-out" }}>
+                  <span className="text-base">📅</span>
+                  <div>
+                    <p className="text-sm font-bold text-indigo-800">
+                      {new Date(b.scheduledDate).toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short", year: "numeric" })}
+                      {b.scheduledTime && <span className="ml-1.5 text-indigo-600">at {b.scheduledTime}</span>}
+                    </p>
+                    <p className="text-xs text-indigo-500">Scheduled appointment</p>
+                  </div>
+                </div>
+              )}
+
               {/* ASSIGNED MECHANIC */}
               {b.assignedMechanic && (
                 <div className="mt-3 flex items-center gap-2 bg-blue-50 border border-blue-100 rounded-xl px-4 py-2.5">
@@ -76,7 +93,7 @@ const MyBookings = () => {
 
               <div className="flex items-center justify-between mt-4">
                 <p className="text-xs inline-flex items-center gap-2 text-gray-400 font-medium">
-                  <BsCalendarDay /> {new Date(b.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+                  <BsCalendarDay /> Booked on {new Date(b.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
                 </p>
 
                 {/* PAYMENT BUTTON — show when completed & not yet paid */}

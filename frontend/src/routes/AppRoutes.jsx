@@ -2,6 +2,7 @@ import MainLayout from "../layouts/MainLayout";
 import Landing from "../pages/landing/Landing";
 
 import ProtectedRoute from "./ProtectedRoute";
+import GuestRoute from "./GuestRoute";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navigate } from "react-router-dom";
@@ -45,15 +46,15 @@ const AppRoutes = () => {
             <Routes>
                 {/* 🔥 LANDING */}
                 <Route element={<MainLayout />}>
-                    <Route path="/" element={<Landing />} />
+                    <Route path="/" element={<GuestRoute><Landing /></GuestRoute>} />
                 </Route>
 
                 {/* AUTH */}
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/verify-otp" element={<VerifyOTP />} />
-                <Route path="/forgot-password" element={<ForgotPassword />} />
-                <Route path="/reset-password/:token" element={<ResetPassword />} />
+                <Route path="/login" element={<GuestRoute><Login /></GuestRoute>} />
+                <Route path="/register" element={<GuestRoute><Register /></GuestRoute>} />
+                <Route path="/verify-otp" element={<GuestRoute><VerifyOTP /></GuestRoute>} />
+                <Route path="/forgot-password" element={<GuestRoute><ForgotPassword /></GuestRoute>} />
+                <Route path="/reset-password/:token" element={<GuestRoute><ResetPassword /></GuestRoute>} />
 
                 {/* USER */}
                 <Route
