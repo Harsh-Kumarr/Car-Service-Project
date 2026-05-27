@@ -69,6 +69,20 @@ export const updateStatus = async (req, res, next) => {
   }
 };
 
+// GET SERVICE LOGS FOR A BOOKING
+export const getServiceLogs = async (req, res, next) => {
+  try {
+    const logs = await bookingService.getServiceLogs(
+      req.params.bookingId,
+      req.user.id
+    );
+
+    res.json({ success: true, logs });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const uploadMedia = (req, res) => {
   res.json({
     success: true,

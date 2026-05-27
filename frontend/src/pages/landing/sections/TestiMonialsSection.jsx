@@ -57,7 +57,7 @@ const TestimonialsSection = () => {
             avatar: `https://i.pravatar.cc/150?u=${r._id}`,
             isReal: true,
           }));
-          setReviews([...apiReviews, ...fallbackTestimonials]);
+          setReviews([...apiReviews]);
         } else {
           setReviews(fallbackTestimonials);
         }
@@ -80,7 +80,7 @@ const TestimonialsSection = () => {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
-            What Our Users Say ⭐
+            What Our Users Say 
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto">
             Don't just take our word for it. See how we're changing the car service experience for thousands of happy customers.
@@ -144,7 +144,7 @@ const TestimonialsSection = () => {
                 <p className="text-gray-600 mb-8 leading-relaxed relative z-10">"{t.review}"</p>
 
                 <div className="flex items-center gap-4 border-t border-gray-50 pt-6">
-                  <img src={t.avatar} alt={t.name} className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-md"/>
+                  {/* <img src={t.avatar} alt={t.name} className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-md"/> */}
                   <div>
                     <h4 className="font-bold text-gray-900">{t.name}</h4>
                     <span className="text-sm text-gray-500">{t.role}</span>

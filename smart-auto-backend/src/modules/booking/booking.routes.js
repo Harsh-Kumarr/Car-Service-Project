@@ -6,6 +6,7 @@ import {
   assignMechanic,
   updateStatus,
   uploadMedia,
+  getServiceLogs,
 } from "./booking.controller.js";
 
 import verifyToken from "../../middlewares/auth.middleware.js";
@@ -26,6 +27,7 @@ router.post(
 );
 
 router.get("/my", verifyToken, roleGuard("user"), getMyBookings);
+router.get("/:bookingId/logs", verifyToken, roleGuard("user"), getServiceLogs);
 
 // ADMIN
 router.get("/", verifyToken, roleGuard("admin"), getAllBookings);

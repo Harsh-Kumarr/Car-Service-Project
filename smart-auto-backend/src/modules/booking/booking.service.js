@@ -37,8 +37,25 @@ class BookingService {
   async getUserBookings(userId) {
     return Booking.find({ userId })
       .populate("vehicleId")
-      .populate("assignedMechanic")
+      .populate("assignedMechanic", "name phone")
       .populate("userId");
+  }
+
+  // GET SERVICE LOGS FOR A BOOKING
+  async getServiceLogs(bookingId, userId) {
+    const booking = await Booking.findById(bookingId);
+
+    if (!booking) {
+      throw new AppError("Booking not found", 404);
+    }
+
+    // Ensure the user owns this booking
+    if (booking.userId.toString() !== userId) {
+      throw new AppError("Not authorized to view these logs", 403);
+    }
+
+    const log = await ServiceLog.findOne({ bookingId });
+    return log ? log.updates : [];
   }
 
   // GET ALL BOOKINGS (ADMIN)

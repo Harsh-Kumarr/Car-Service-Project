@@ -12,7 +12,7 @@ class AuthService {
       throw new AppError("Request body is missing", 400);
     }
 
-    const { name, email, password } = data;
+    const { name, email, password, phone } = data;
 
     if (!name || !email || !password) {
       throw new AppError("All fields are required", 400);
@@ -28,6 +28,7 @@ class AuthService {
       name,
       email,
       password: hashedPassword,
+      phone: phone || null,
       otp,
       otpExpires: Date.now() + 10 * 60 * 1000,
       // role:'mechanic'

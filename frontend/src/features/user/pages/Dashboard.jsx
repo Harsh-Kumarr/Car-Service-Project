@@ -1,11 +1,10 @@
 import { useEffect, useState, useMemo } from "react";
-import { getMyBookings } from "../../booking/bookingService";
+import { getMyBookings, getServiceLogs } from "../../booking/bookingService";
 import { getVehicles } from "../../vehicle/vehicleService";
 import { Link } from "react-router-dom";
 import { IoCarSportOutline } from "react-icons/io5";
-import { BsTools } from "react-icons/bs";
-import { BsCalendarDay } from "react-icons/bs";
-import { BsDatabaseSlash } from "react-icons/bs";
+import { BsTools, BsCalendarDay, BsDatabaseSlash, BsChatLeftTextFill, BsTelephoneFill } from "react-icons/bs";
+import { MdExpandMore, MdExpandLess } from "react-icons/md";
 
 
 
@@ -25,6 +24,9 @@ const Dashboard = () => {
   const [bookings, setBookings] = useState([]);
   const [vehicles, setVehicles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [serviceLogs, setServiceLogs] = useState({});
+  const [expandedBooking, setExpandedBooking] = useState(null);
+  const [showPhone, setShowPhone] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -162,6 +164,18 @@ const Dashboard = () => {
         )}
       </div>
 
+      {/* MECHANIC UPDATES */}
+      <MechanicUpdates
+        bookings={bookings}
+        serviceLogs={serviceLogs}
+        setServiceLogs={setServiceLogs}
+        expandedBooking={expandedBooking}
+        setExpandedBooking={setExpandedBooking}
+        showPhone={showPhone}
+        setShowPhone={setShowPhone}
+        statusColor={statusColor}
+      />
+
       {/* RECENT BOOKINGS */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
         <div className="px-6 py-5 border-b border-gray-100">
@@ -172,7 +186,7 @@ const Dashboard = () => {
           <div className="p-8 text-center text-gray-400">No bookings yet.</div>
         ) : (
           <div className="divide-y divide-gray-50">
-            {bookings.slice(0, 5).map((b) => (
+            {[...bookings].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 5).map((b) => (
               <div key={b._id} className="px-6 py-4 hover:bg-gray-200 transition-colors">
                 <div className="flex items-center justify-between">
                   <div>
@@ -219,6 +233,196 @@ const Dashboard = () => {
           </div>
         )}
       </div>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────
+   MECHANIC UPDATES — shows notes & contact for active jobs
+   ───────────────────────────────────────────────────────── */
+const MechanicUpdates = ({
+  bookings,
+  serviceLogs,
+  setServiceLogs,
+  expandedBooking,
+  setExpandedBooking,
+  showPhone,
+  setShowPhone,
+  statusColor,
+}) => {
+  // Active bookings with a mechanic assigned
+  const activeJobs = useMemo(
+    () =>
+      bookings.filter(
+        (b) => b.assignedMechanic && b.status !== "completed" && b.status !== "rejected" && b.status !== "pending"
+      ),
+    [bookings]
+  );
+
+  const handleToggle = async (bookingId) => {
+    if (expandedBooking === bookingId) {
+      setExpandedBooking(null);
+      return;
+    }
+    setExpandedBooking(bookingId);
+
+    // Fetch logs if not cached
+    if (!serviceLogs[bookingId]) {
+      try {
+        const res = await getServiceLogs(bookingId);
+        setServiceLogs((prev) => ({ ...prev, [bookingId]: res.data.logs || [] }));
+      } catch {
+        setServiceLogs((prev) => ({ ...prev, [bookingId]: [] }));
+      }
+    }
+  };
+
+  const statusIcon = (status) => {
+    const map = {
+      pending: "📋",
+      accepted: "✅",
+      diagnosing: "🔍",
+      repairing: "🔧",
+      testing: "🧪",
+      completed: "🏁",
+    };
+    return map[status] || "📝";
+  };
+
+  if (activeJobs.length === 0) return null;
+
+  return (
+    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="px-6 py-5 border-b border-gray-100 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-md shadow-violet-200/50">
+            <BsChatLeftTextFill className="text-white text-lg" />
+          </div>
+          <div>
+            <h3 className="text-lg font-bold text-gray-900">Mechanic Updates</h3>
+            <p className="text-xs text-gray-400 mt-0.5">Notes and progress from your assigned mechanic</p>
+          </div>
+        </div>
+        <span className="text-xs font-bold text-violet-600 bg-violet-50 px-3 py-1 rounded-full">
+          {activeJobs.length} active
+        </span>
+      </div>
+
+      <div className="divide-y divide-gray-50">
+        {activeJobs.map((b) => {
+          const isExpanded = expandedBooking === b._id;
+          const logs = serviceLogs[b._id] || [];
+          const mechanic = b.assignedMechanic;
+          const phoneVisible = showPhone[b._id];
+
+          return (
+            <div key={b._id} className="transition-colors">
+              {/* BOOKING HEADER — click to expand */}
+              <button
+                onClick={() => handleToggle(b._id)}
+                className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-lg font-bold text-blue-600 flex-shrink-0">
+                    {mechanic?.name?.charAt(0)?.toUpperCase() || "M"}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900 text-sm">
+                      {b.vehicleId?.brand} {b.vehicleId?.model}
+                      <span className="text-gray-400 font-normal ml-2">— {b.serviceType}</span>
+                    </p>
+                    <p className="text-xs text-gray-500 mt-0.5 flex items-center gap-1.5">
+                      🔧 {mechanic?.name || "Mechanic"}
+                      <span className={`ml-2 px-2 py-0.5 rounded-full text-[10px] font-bold capitalize ${statusColor(b.status)}`}>
+                        {b.status}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+                <span className="text-gray-400 text-xl flex-shrink-0">
+                  {isExpanded ? <MdExpandLess /> : <MdExpandMore />}
+                </span>
+              </button>
+
+              {/* EXPANDED CONTENT */}
+              {isExpanded && (
+                <div className="px-6 pb-5" style={{ animation: "fadeSlideIn 0.25s ease-out" }}>
+                  {/* CONTACT MECHANIC */}
+                  <div className="flex items-center gap-3 mb-4">
+                    <button
+                      onClick={() => setShowPhone((prev) => ({ ...prev, [b._id]: !prev[b._id] }))}
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all active:scale-95 border border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 hover:shadow-sm"
+                    >
+                      <BsTelephoneFill className="text-xs" />
+                      {phoneVisible ? "Hide Number" : "Contact Mechanic"}
+                    </button>
+                    {phoneVisible && (
+                      <span className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-50 border border-gray-200 text-sm font-bold text-gray-800" style={{ animation: "fadeSlideIn 0.2s ease-out" }}>
+                        📞 {mechanic?.phone || "Phone not available"}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* SERVICE LOG TIMELINE */}
+                  {logs.length === 0 ? (
+                    <div className="text-center py-6 text-gray-400">
+                      <p className="text-sm font-medium">No mechanic notes yet.</p>
+                      <p className="text-xs mt-1">Updates will appear here once the mechanic adds notes.</p>
+                    </div>
+                  ) : (
+                    <div className="relative pl-6 space-y-4">
+                      {/* Vertical timeline line */}
+                      <div className="absolute left-[11px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-violet-300 via-blue-200 to-gray-100 rounded-full"></div>
+
+                      {[...logs].reverse().map((log, i) => (
+                        <div key={i} className="relative flex gap-3">
+                          {/* Timeline dot */}
+                          <div className={`absolute -left-6 top-1 w-[22px] h-[22px] rounded-full border-2 border-white shadow-sm flex items-center justify-center text-[11px] ${
+                            i === 0 ? "bg-violet-500 text-white" : "bg-gray-100 text-gray-500"
+                          }`}>
+                            {statusIcon(log.status)}
+                          </div>
+
+                          <div className={`flex-1 rounded-xl p-3.5 ${
+                            i === 0 ? "bg-violet-50 border border-violet-100" : "bg-gray-50 border border-gray-100"
+                          }`}>
+                            <div className="flex items-center justify-between mb-1">
+                              <span className={`text-xs font-bold capitalize px-2 py-0.5 rounded-full ${
+                                i === 0 ? "bg-violet-100 text-violet-700" : "bg-gray-200 text-gray-600"
+                              }`}>
+                                {log.status}
+                              </span>
+                              <span className="text-[10px] text-gray-400 font-medium">
+                                {new Date(log.timestamp).toLocaleString("en-IN", {
+                                  day: "numeric",
+                                  month: "short",
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                                })}
+                              </span>
+                            </div>
+                            {log.note && (
+                              <p className="text-sm text-gray-700 mt-1 leading-relaxed">{log.note}</p>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* ANIMATION KEYFRAMES */}
+      <style>{`
+        @keyframes fadeSlideIn {
+          from { opacity: 0; transform: translateY(-6px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </div>
   );
 };

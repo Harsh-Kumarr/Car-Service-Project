@@ -33,6 +33,12 @@ const userSchema = new mongoose.Schema(
     resetPasswordToken: String,
     resetPasswordExpires: Date,
 
+    // Phone number (used for mechanic contact)
+    phone: {
+      type: String,
+      default: null,
+    },
+
     // OTP fields
     otp: String,
     otpExpires: Date,
