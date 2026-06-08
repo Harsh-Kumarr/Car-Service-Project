@@ -1,39 +1,39 @@
-# 🚗 Smart Auto – AI Powered Car Service Platform
+# Smart Auto – AI Powered Car Service Platform
 
 An AI-powered full-stack automobile service and diagnostics platform.
 
 ---
 
-## 🚀 Features
+## Features
 
-### 👤 User
+### User
 - Register & Login (OTP verification)
 - Add & manage vehicles
 - Book car services
 - Track service status
 - AI-based vehicle diagnosis
 
-### 🛠 Admin
+### Admin
 - View all bookings
 - Accept / Reject bookings
 - Assign mechanics
 - Dashboard analytics
 
-### 🔧 Mechanic
+### Mechanic
 - View assigned jobs
 - Update job status
 - Add service notes
 
 ---
 
-## 🤖 AI Features
+## AI Features
 - AI-based issue diagnosis
 - Cost estimation
 - Urgency detection
 
 ---
 
-## 🏗 Tech Stack
+## Tech Stack
 
 ### Frontend
 - React (Vite)
@@ -52,18 +52,18 @@ An AI-powered full-stack automobile service and diagnostics platform.
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 ---
 
-## ⚙️ Setup Instructions
+## Setup Instructions
 
-### 1️⃣ Clone Repository
+### Clone Repository
 ```bash
 git clone https://github.com/Harsh-Kumarr/Car-Service-Project.git
 cd Car-Service-Project
 ```
 
-### 2️⃣ Backend Setup
+### Backend Setup
 ```bash
 cd smart-auto-backend
 npm install
@@ -74,7 +74,7 @@ npm install
 npm run dev
 ```
 
-### 3️⃣ Frontend Setup
+### Frontend Setup
 ```bash
 cd ../frontend
 npm install
@@ -85,5 +85,5 @@ npm install
 npm run dev
 ```
 
-## 🛡️ License
+## License
 This project is licensed under the MIT License.
