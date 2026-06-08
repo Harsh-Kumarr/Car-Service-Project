@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAllBookings } from "../adminService";
-import { BsCalendarDay } from "react-icons/bs";
+import { BsCalendarDay, BsTools } from "react-icons/bs";
+import { FaUser } from "react-icons/fa";
 
 const CompletedBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -23,14 +24,14 @@ const CompletedBookings = () => {
           <h3 className="text-lg font-bold text-gray-900">
             {b.vehicleId?.brand} {b.vehicleId?.model}
           </h3>
-          <p className="text-sm text-gray-500">👤 {b.userId?.name}</p>
+          <p className="text-sm text-gray-500 flex items-center gap-2"><FaUser /> {b.userId?.name}</p>
         </div>
         <span className="px-3 py-1 rounded-full text-xs font-bold capitalize bg-green-100 text-green-700">
           {b.status}
         </span>
       </div>
 
-      <p className="text-sm text-gray-600 bg-white p-3 rounded-xl mb-3 border border-emerald-50">🛠 {b.serviceType}</p>
+      <p className="text-sm text-gray-600 bg-white p-3 rounded-xl mb-3 border border-emerald-50 flex items-center gap-2"><BsTools /> {b.serviceType}</p>
 
       <p className="text-xs inline-flex items-center gap-2 text-gray-400 font-medium">
         <BsCalendarDay /> Completed: {new Date(b.updatedAt || b.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
@@ -41,14 +42,13 @@ const CompletedBookings = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">Completed Bookings 🎉</h2>
+        <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">Completed Bookings</h2>
         <p className="text-gray-500 mt-1">Review all successfully completed services.</p>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
         {bookings.length === 0 ? (
           <div className="col-span-2 text-center py-12 bg-white rounded-2xl border border-gray-100">
-            <span className="text-4xl">🎉</span>
             <p className="text-gray-400 mt-2 font-medium">No completed bookings yet.</p>
           </div>
         ) : (

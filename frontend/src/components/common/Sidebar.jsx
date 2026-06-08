@@ -28,7 +28,7 @@ const Sidebar = () => {
       <div className="mb-10 mt-2 px-2">
         <h2 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Menu</h2>
         <p className="text-xl font-extrabold tracking-tight text-white flex items-center gap-2 cursor-default">
-          AutoAI <span className="text-blue-500">⚡</span>
+          AutoAI 
         </p>
       </div>
 

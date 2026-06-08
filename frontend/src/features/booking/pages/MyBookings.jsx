@@ -67,7 +67,7 @@ const MyBookings = () => {
               {/* SCHEDULED DATE/TIME */}
               {b.scheduledDate && (
                 <div className="mt-3 flex items-center gap-2 bg-indigo-50 border border-indigo-100 rounded-xl px-4 py-2.5" style={{ animation: "fadeSlideIn 0.25s ease-out" }}>
-                  <span className="text-base">📅</span>
+                  <span className="text-base"><BsCalendarDay /></span>
                   <div>
                     <p className="text-sm font-bold text-indigo-800">
                       {new Date(b.scheduledDate).toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short", year: "numeric" })}

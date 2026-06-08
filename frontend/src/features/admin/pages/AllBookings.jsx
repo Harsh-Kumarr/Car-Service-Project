@@ -6,6 +6,10 @@ import {
 } from "../adminService";
 import AssignModal from "./AssignModal";
 import toast from "react-hot-toast";
+import { BsTools } from "react-icons/bs";
+import { BsCalendarDay } from "react-icons/bs";
+import { FaUser } from "react-icons/fa";
+
 
 const AllBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -72,19 +76,19 @@ const AllBookings = () => {
           <h3 className="text-lg font-bold text-gray-900">
             {b.vehicleId?.brand} {b.vehicleId?.model}
           </h3>
-          <p className="text-sm text-gray-500">👤 {b.userId?.name}</p>
+          <p className="text-sm text-gray-500 flex items-center gap-2" ><FaUser /> {b.userId?.name}</p>
         </div>
         <span className={`px-3 py-1 rounded-full text-xs font-bold capitalize ${statusColor(b.status)}`}>
           {b.status}
         </span>
       </div>
 
-      <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-xl mb-3">🛠 {b.serviceType}</p>
+      <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-xl mb-3 flex items-center gap-2"><BsTools /> {b.serviceType}</p>
 
       {/* SCHEDULED APPOINTMENT */}
       {b.scheduledDate && (
         <div className="flex items-center gap-2 mb-3 bg-indigo-50 border border-indigo-100 rounded-xl px-3 py-2">
-          <span className="text-sm">📅</span>
+          <span className="text-sm"><BsCalendarDay /></span>
           <p className="text-xs font-bold text-indigo-800">
             {new Date(b.scheduledDate).toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short", year: "numeric" })}
             {b.scheduledTime && <span className="ml-1 text-indigo-600">at {b.scheduledTime}</span>}
@@ -93,7 +97,7 @@ const AllBookings = () => {
       )}
 
       <p className="text-xs text-gray-400 font-medium mb-4">
-        🕐 Booked on {new Date(b.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+        Booked on {new Date(b.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
       </p>
 
       <div className="flex gap-2 flex-wrap">
@@ -145,7 +149,7 @@ const AllBookings = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">Bookings 📋</h2>
+        <h2 className="text-3xl font-extrabold text-gray-900 flex items-center gap-3 tracking-tight">Bookings <BsCalendarDay /></h2>
         <p className="text-gray-500 mt-1">Manage and review all service bookings.</p>
       </div>
 

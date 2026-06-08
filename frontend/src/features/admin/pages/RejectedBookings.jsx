@@ -41,14 +41,13 @@ const RejectedBookings = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">Rejected Bookings ❌</h2>
+        <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">Rejected Bookings </h2>
         <p className="text-gray-500 mt-1">Review all the bookings that were cancelled or rejected.</p>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
         {bookings.length === 0 ? (
           <div className="col-span-2 text-center py-12 bg-white rounded-2xl border border-gray-100">
-            <span className="text-4xl">❌</span>
             <p className="text-gray-400 mt-2 font-medium">No rejected bookings found.</p>
           </div>
         ) : (

@@ -5,10 +5,11 @@ import { useNavigate } from "react-router-dom";
 import useVehicleStore from "../../vehicle/vehicleStore";
 import Button from "../../../components/ui/Button";
 import toast from "react-hot-toast";
+import { BsTools } from "react-icons/bs";
 
 const SERVICE_TYPES = [
   {
-    category: "🔧 Maintenance",
+    category: "Maintenance",
     services: [
       { value: "Oil Change", desc: "Engine oil & filter replacement" },
       { value: "Full Service", desc: "Complete multi-point inspection & servicing" },
@@ -18,14 +19,14 @@ const SERVICE_TYPES = [
     ],
   },
   {
-    category: "❄️ Climate & Comfort",
+    category: "Climate & Comfort",
     services: [
       { value: "AC Service", desc: "AC gas refill, cooling check & vent cleaning" },
       { value: "Heater Repair", desc: "Heater core, blower motor & thermostat fix" },
     ],
   },
   {
-    category: "⚙️ Engine & Drivetrain",
+    category: "Engine & Drivetrain",
     services: [
       { value: "Engine Repair", desc: "Engine diagnostics, rebuild & part replacement" },
       { value: "Transmission Service", desc: "Gearbox fluid change, clutch & shifting repair" },
@@ -33,21 +34,21 @@ const SERVICE_TYPES = [
     ],
   },
   {
-    category: "🛞 Brakes & Suspension",
+    category: "Brakes & Suspension",
     services: [
       { value: "Brake Service", desc: "Brake pads, rotors, fluid & line inspection" },
       { value: "Suspension Repair", desc: "Shocks, struts, bushings & alignment" },
     ],
   },
   {
-    category: "⚡ Electrical & Diagnostics",
+    category: "Electrical & Diagnostics",
     services: [
       { value: "Diagnostics", desc: "OBD-II scan, fault code analysis & troubleshooting" },
       { value: "Electrical Repair", desc: "Wiring, fuse, alternator & starter motor fixes" },
     ],
   },
   {
-    category: "🎨 Body & Exterior",
+    category: "Body & Exterior",
     services: [
       { value: "Denting & Painting", desc: "Dent removal, scratch repair & full repaint" },
       { value: "Windshield Replacement", desc: "Cracked or chipped windshield replacement" },
@@ -204,7 +205,7 @@ const CreateBooking = () => {
     <div className="max-w-2xl mx-auto">
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-10">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">Book Service 🛠️</h2>
+          <h2 className="text-3xl font-extrabold text-gray-900 flex justify-center items-center gap-3 tracking-tight">Book Service <BsTools /></h2>
           <p className="text-gray-500 mt-1">Select your vehicle, choose a service, and pick a date & time.</p>
         </div>
 
