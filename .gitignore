@@ -1,6 +1,8 @@
 # 🔐 ENV FILES
 .env
 .env.*
+!.env.example
+!smart-auto-backend/.env.example
 smart-auto-backend/.env
 
 # 📦 NODE MODULES
