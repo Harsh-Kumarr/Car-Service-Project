@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import api from "../../../services/api";
 
 // Fallback testimonials (shown when no API reviews or alongside)
 const fallbackTestimonials = [
@@ -45,9 +46,9 @@ const TestimonialsSection = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/reviews")
-      .then((res) => res.json())
-      .then((data) => {
+    api.get("/reviews")
+      .then((res) => {
+        const data = res.data;
         if (data.success && data.reviews?.length > 0) {
           const apiReviews = data.reviews.map((r) => ({
             name: r.userId?.name || "Anonymous",

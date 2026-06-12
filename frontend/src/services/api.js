@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://car-service-project-theta.vercel.app",
+  baseURL: "https://car-service-project-theta.vercel.app/api",
 });
 
 api.interceptors.request.use((config) => {
