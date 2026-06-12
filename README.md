@@ -1,35 +1,40 @@
 # Smart Auto – AI Powered Car Service Platform
 
-An AI-powered full-stack automobile service and diagnostics platform.
+An AI-powered full-stack automobile service and diagnostics platform designed to streamline vehicle maintenance, service booking, and intelligent issue detection.
+
+## Live Demo
+
+**Application URL:** https://car-service-project-8uda.vercel.app
 
 ---
 
 ## Features
 
-### User
-- Register & Login (OTP verification)
-- Add & manage vehicles
-- Book car services
-- Track service status
-- AI-based vehicle diagnosis
+### User Module
+- User registration and login with OTP verification
+- Add and manage multiple vehicles
+- Book vehicle services online
+- Track service progress in real time
+- AI-powered vehicle issue diagnosis
 
-### Admin
-- View all bookings
-- Accept / Reject bookings
-- Assign mechanics
-- Dashboard analytics
+### Admin Module
+- Manage and review all service bookings
+- Accept or reject service requests
+- Assign mechanics to service jobs
+- Monitor platform activity through analytics dashboards
 
-### Mechanic
-- View assigned jobs
-- Update job status
-- Add service notes
+### Mechanic Module
+- View assigned service tasks
+- Update service and repair status
+- Add service notes and inspection details
 
 ---
 
 ## AI Features
-- AI-based issue diagnosis
-- Cost estimation
-- Urgency detection
+
+- Intelligent vehicle issue diagnosis
+- Service cost estimation
+- Issue urgency assessment and prioritization
 
 ---
 
@@ -38,52 +43,106 @@ An AI-powered full-stack automobile service and diagnostics platform.
 ### Frontend
 - React (Vite)
 - Tailwind CSS
-- Zustand (state management)
-- Framer Motion (animations)
+- Zustand (State Management)
+- Framer Motion
 
 ### Backend
 - Node.js
 - Express.js
-- MongoDB + Mongoose
+- MongoDB
+- Mongoose
 - JWT Authentication
 
-### AI
+### AI Integration
 - Google Gemini API
 
 ---
 
 ## Project Structure
+
+```text
+Car-Service-Project/
+├── frontend/
+├── smart-auto-backend/
+├── README.md
+└── .env.example
+```
+
 ---
 
-## Setup Instructions
+## Getting Started
 
-### Clone Repository
+### Clone the Repository
+
 ```bash
 git clone https://github.com/Harsh-Kumarr/Car-Service-Project.git
 cd Car-Service-Project
 ```
 
-### Backend Setup
+---
+
+## Environment Variables
+
+Create environment files using the provided `.env.example` files as references.
+
+### Backend (`smart-auto-backend/.env`)
+
+```env
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASS=your_gmail_app_password
+RAZORPAY_KEY_ID=your_razorpay_key_id
+RAZORPAY_KEY_SECRET=your_razorpay_key_secret
+GEMINI_API_KEY=your_gemini_api_key
+```
+
+### Frontend (`frontend/.env`)
+
+```env
+VITE_API_BASE_URL=http://localhost:5000/api
+```
+
+---
+
+## Backend Setup
+
 ```bash
 cd smart-auto-backend
 npm install
-```
-- Create a `.env` file in the `smart-auto-backend` directory and add the necessary environment variables (e.g., `PORT`, `MONGO_URI`, `JWT_SECRET`, `GEMINI_API_KEY`).
-- Start the server:
-```bash
 npm run dev
 ```
 
-### Frontend Setup
+The backend server will start on the configured port.
+
+---
+
+## Frontend Setup
+
 ```bash
-cd ../frontend
+cd frontend
 npm install
-```
-- Create a `.env` file in the `frontend` directory if required by your configuration (e.g., `VITE_API_BASE_URL`).
-- Start the frontend:
-```bash
 npm run dev
 ```
+
+The frontend application will be available at the local development URL provided by Vite.
+
+---
+
+## Deployment
+
+The application is deployed and accessible at:
+
+https://car-service-project-8uda.vercel.app
+
+---
 
 ## License
+
 This project is licensed under the MIT License.
+
+## Author
+
+Harsh Kumar
+
+GitHub: https://github.com/Harsh-Kumarr
