@@ -3,6 +3,7 @@ import crypto from "crypto";
 import bcrypt from "bcryptjs";
 import { User } from "../../models/models.js";
 import { sendEmail } from "../../services/email.service.js";
+import { resetPasswordTemplate } from "../../utils/emailTemplates.js";
 export const register = async (req, res, next) => {
   try {
     const result = await authService.register(req.body);
@@ -73,12 +74,12 @@ export const forgotPassword = async (req, res, next) => {
 
     await user.save();
 
-    const link = `http://localhost:5173/reset-password/${token}`;
+    const link = `https://car-service-project-8uda.vercel.app/reset-password/${token}`;
 
     await sendEmail(
       user.email,
       "Reset Password",
-      `<p>Click here: <a href="${link}">Reset Password</a></p>`
+      resetPasswordTemplate(user.name, link)
     );
 
     res.json({ success: true, message: "Reset link sent" });

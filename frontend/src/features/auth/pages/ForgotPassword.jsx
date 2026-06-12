@@ -45,7 +45,7 @@ const ForgotPassword = () => {
       {/* --- RECOVERY CARD --- */}
       <div className="w-full max-w-md relative group z-10">
         {/* Glow Border */}
-        <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-rose-600 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+
         
         <div className="relative bg-slate-900/60 backdrop-blur-2xl border border-white/10 p-8 sm:p-10 rounded-3xl shadow-2xl">
           

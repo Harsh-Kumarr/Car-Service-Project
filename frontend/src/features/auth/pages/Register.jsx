@@ -54,7 +54,7 @@ const Register = () => {
       {/* --- REGISTER CARD --- */}
       <div className="w-full max-w-md relative group z-10">
         {/* Glow Border Effect */}
-        <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+        {/* <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div> */}
         
         <div className="relative bg-slate-900/60 backdrop-blur-2xl border border-white/10 p-8 sm:p-10 rounded-3xl shadow-2xl">
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -77,7 +77,7 @@ const Register = () => {
                 name="name"
                 register={register}
                 errors={errors}
-                placeholder="John Doe"
+                placeholder="Harish"
                 className="bg-slate-800/50 border-slate-700 text-white focus:ring-blue-500/50"
               />
 
@@ -87,7 +87,7 @@ const Register = () => {
                 name="email"
                 register={register}
                 errors={errors}
-                placeholder="name@example.com"
+                placeholder="xyzgmail.com"
                 className="bg-slate-800/50 border-slate-700 text-white focus:ring-blue-500/50"
               />
 
@@ -112,7 +112,7 @@ const Register = () => {
               </div>
             </div>
 
-            {/* ❌ ERROR MESSAGE */}
+            {/*ERROR MESSAGE */}
             {apiError && (
               <div className="mt-6 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl p-3 animate-pulse">
                 <p className="text-xs text-center font-medium">{apiError}</p>
