@@ -17,7 +17,7 @@ app.use("/api", apiLimiter);
 
 // Health Check
 app.get("/", (req, res) => {
-  res.send("🚗 Smart Auto Backend Running...");
+  res.send("Car Service Backend Running...");
 });
 
 // API Routes

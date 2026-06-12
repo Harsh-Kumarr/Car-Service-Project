@@ -1,4 +1,5 @@
 import express from "express";
+import mongoose from "mongoose";
 
 import authRoutes from "../modules/auth/auth.routes.js";
 import bookingRoutes from "../modules/booking/booking.routes.js";
