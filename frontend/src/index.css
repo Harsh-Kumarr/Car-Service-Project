@@ -1,1 +1,48 @@
 @import "tailwindcss";
+
+/* 🎨 Tourney Custom Font */
+@font-face {
+  font-family: 'Tourney';
+  src: url('/Tourney/Tourney-VariableFont_wdth,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tourney';
+  src: url('/Tourney/Tourney-Italic-VariableFont_wdth,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* 🎨 Cinzel Decorative Custom Font */
+@font-face {
+  font-family: 'Cinzel Decorative';
+  src: url('/Cinzel_Decorative/CinzelDecorative-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cinzel Decorative';
+  src: url('/Cinzel_Decorative/CinzelDecorative-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cinzel Decorative';
+  src: url('/Cinzel_Decorative/CinzelDecorative-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-tourney: "Tourney", sans-serif;
+  --font-cinzel: "Cinzel Decorative", serif;
+}

@@ -27,14 +27,20 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0a0f1d] relative overflow-hidden font-sans px-4 text-slate-200">
+    <div className="min-h-screen flex items-center justify-center bg-[#0A0F1C] relative overflow-hidden font-sans px-4 text-slate-200">
       
-      {/* --- BACKGROUND AMBIENCE --- */}
-      {/* Amber/Orange Glow for Recovery theme */}
-      <div className="absolute top-[-15%] left-[-5%] w-[600px] h-[600px] bg-orange-600/10 rounded-full blur-[120px] animate-pulse"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-rose-600/10 rounded-full blur-[100px]"></div>
-      {/* Grainy Texture */}
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-50 pointer-events-none"></div>
+      {/* Dark Grid Background */}
+      <div 
+        className="absolute inset-0 bg-[#0A0F1C] pointer-events-none" 
+        style={{ 
+          backgroundImage: `
+            linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), 
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px',
+          backgroundPosition: 'center'
+        }}
+      />
 
       {/* --- RECOVERY CARD --- */}
       <div className="w-full max-w-md relative group z-10">

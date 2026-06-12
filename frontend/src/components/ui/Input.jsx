@@ -1,4 +1,5 @@
-const Input = ({ label, register, name, errors = {}, ...props }) => {
+const Input = ({ label, register, name, errors = {}, className = "", ...props }) => {
+  const inputClasses = `w-full p-2 shadow-[inset_0_2px_8px_rgba(0,0,0,0.20)] rounded-xl focus:outline-none ${className}`;
   return (
     <div className="mb-4">
       <label className="block mb-1 ">{label}</label>
@@ -6,7 +7,7 @@ const Input = ({ label, register, name, errors = {}, ...props }) => {
       <input
         {...(register ? register(name) : {})}
         {...props}
-        className="w-full p-2 shadow-[inset_0_2px_8px_rgba(0,0,0,0.20)] rounded-xl focus:outline-none"
+        className={inputClasses}
       />
 
       {errors?.[name] && (

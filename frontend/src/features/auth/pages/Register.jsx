@@ -36,15 +36,20 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0a0f1d] relative overflow-hidden font-sans py-12 px-4 text-slate-200">
+    <div className="min-h-screen flex items-center justify-center bg-[#0A0F1C] relative overflow-hidden font-sans py-12 px-4 text-slate-200">
       
-      {/* --- BACKGROUND ANIMATIONS --- */}
-      {/* Deep Blue Glow */}
-      <div className="absolute top-[-15%] right-[-5%] w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[120px] animate-pulse"></div>
-      {/* Pink/Purple Glow */}
-      <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-600/15 rounded-full blur-[100px]"></div>
-      {/* Texture Overlay */}
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-50 pointer-events-none"></div>
+      {/* Dark Grid Background */}
+      <div 
+        className="absolute inset-0 bg-[#0A0F1C] pointer-events-none" 
+        style={{ 
+          backgroundImage: `
+            linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), 
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px',
+          backgroundPosition: 'center'
+        }}
+      />
 
       {/* --- REGISTER CARD --- */}
       <div className="w-full max-w-md relative group z-10">

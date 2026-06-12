@@ -8,7 +8,7 @@ import Footer from "./sections/Footer";
 
 const Landing = () => {
   return (
-    <>
+    <div className="font-cinzel bg-[#0A0F1C] text-white">
       <HeroSection />
       <ServicesSection />
       <AiSection />
@@ -16,7 +16,7 @@ const Landing = () => {
       <PricingSection />
       <AppPromoSection />
       <Footer />
-    </>
+    </div>
   );
 };
 

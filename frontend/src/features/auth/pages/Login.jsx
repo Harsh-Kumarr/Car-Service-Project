@@ -47,20 +47,25 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0a0f1d] relative overflow-hidden font-sans text-slate-200">
+    <div className="min-h-screen flex items-center justify-center bg-[#0A0F1C] relative overflow-hidden font-sans text-slate-200">
       
-      {/* --- ANIMATED BACKGROUND EFFECTS --- */}
-      {/* Purple Glow */}
-      <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-purple-600/20 rounded-full blur-[120px] animate-pulse"></div>
-      {/* Cyan Glow */}
-      <div className="absolute bottom-[-10%] right-[-5%] w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[100px] delay-700"></div>
-      {/* Subtle Grid Overlay */}
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-50 contrast-150 pointer-events-none"></div>
+      {/* Dark Grid Background */}
+      <div 
+        className="absolute inset-0 bg-[#0A0F1C] pointer-events-none" 
+        style={{ 
+          backgroundImage: `
+            linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), 
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px',
+          backgroundPosition: 'center'
+        }}
+      />
 
       {/* --- LOGIN CARD --- */}
       <div className="w-full max-w-md mx-4 relative group">
         {/* Card Border Glow Effect */}
-        <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+        <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-3xl blur opacity-20 "></div>
         
         <div className="relative bg-slate-900/60 backdrop-blur-2xl border border-white/10 p-8 sm:p-10 rounded-3xl shadow-2xl">
           <form onSubmit={handleSubmit(onSubmit)}>
