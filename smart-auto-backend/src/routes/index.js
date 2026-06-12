@@ -35,7 +35,15 @@ router.use("/reviews", reviewRoutes);
 
 // ❤️ HEALTH CHECK
 router.get("/health", (req, res) => {
-  res.json({ status: "OK" });
+  res.json({
+    success: true,
+    database:
+      mongoose.connection.readyState === 1
+        ? "connected"
+        : "disconnected",
+    uptime: process.uptime(),
+    timestamp: new Date(),
+  });
 });
 
 export default router;
