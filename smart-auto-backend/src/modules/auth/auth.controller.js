@@ -114,3 +114,15 @@ export const resetPassword = async (req, res, next) => {
     next(err);
   }
 };
+
+// ✅ REFRESH TOKEN
+export const refreshToken = async (req, res, next) => {
+  try {
+    const { refreshToken: tokenToVerify } = req.body;
+    const result = await authService.refreshSession(tokenToVerify);
+
+    res.json({ success: true, ...result });
+  } catch (error) {
+    next(error);
+  }
+};

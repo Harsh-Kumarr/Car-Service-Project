@@ -42,6 +42,12 @@ const userSchema = new mongoose.Schema(
     // OTP fields
     otp: String,
     otpExpires: Date,
+
+    // Session Management
+    refreshToken: {
+      type: String,
+      default: null,
+    },
   },
   { timestamps: true }
 );

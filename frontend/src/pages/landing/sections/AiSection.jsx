@@ -28,7 +28,7 @@ const AiSection = () => {
         <div className="lg:w-1/2 w-full z-10 relative">
           <div className="mb-10">
             <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
-              AI Diagnosis 🔥
+              AI Diagnosis
             </h2>
             <p className="text-lg text-gray-500">
               Describe your vehicle's symptoms and let our advanced AI pinpoint the exact problem in seconds.

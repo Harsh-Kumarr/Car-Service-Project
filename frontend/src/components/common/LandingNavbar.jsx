@@ -13,6 +13,7 @@ const LandingNavbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [hoveredLink, setHoveredLink] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,7 +38,8 @@ const LandingNavbar = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         className={`
-          relative pointer-events-auto flex items-center justify-between transition-all duration-500 ease-in-out overflow-hidden
+          relative pointer-events-auto flex items-center justify-between transition-all duration-500 ease-in-out
+          ${isOpen ? "overflow-visible" : "overflow-hidden"}
           ${scrolled 
             ? "w-full max-w-5xl rounded-2xl bg-[#0A0F1C]/80 backdrop-blur-xl border border-white/10 px-8 py-3 shadow-[0_20px_50px_rgba(0,0,0,0.5)]" 
             : "w-full max-w-7xl rounded-none bg-transparent px-10 py-5 border-transparent"
@@ -97,7 +99,48 @@ const LandingNavbar = () => {
               Get Started
             </span>
           </Link>
+
+          {/* Hamburger Menu Toggle Button for Mobile/Tablet */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 rounded-xl bg-white/5 hover:bg-white/10 text-white transition-colors pointer-events-auto"
+          >
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              {isOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
         </div>
+
+        {/* --- MOBILE DROPDOWN --- */}
+        {isOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="absolute top-full left-0 w-full bg-[#0A0F1C]/95 backdrop-blur-2xl border-t border-white/10 p-6 flex flex-col gap-4 md:hidden shadow-2xl z-40 rounded-b-2xl pointer-events-auto"
+          >
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className="text-gray-300 hover:text-white text-sm font-semibold transition-colors py-2 border-b border-white/5"
+              >
+                {link.name}
+              </a>
+            ))}
+            <Link
+              to="/login"
+              onClick={() => setIsOpen(false)}
+              className="text-gray-300 hover:text-white text-sm font-semibold transition-colors py-2"
+            >
+              Log in
+            </Link>
+          </motion.div>
+        )}
 
         {/* --- REAL-TIME PROGRESS BAR --- */}
         <div className="absolute bottom-0 left-0 w-full h-[2px] bg-white/5">

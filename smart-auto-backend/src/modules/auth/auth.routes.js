@@ -6,6 +6,7 @@ import {
   changePassword,
   forgotPassword,
   resetPassword,
+  refreshToken,
 } from "./auth.controller.js";
 
 import verifyToken from "../../middlewares/auth.middleware.js";import { validate } from "../../middlewares/validate.middleware.js";
@@ -16,6 +17,7 @@ const router = express.Router();
 router.post("/register", validate(registerSchema), register);
 router.post("/verify-otp", verifyOTP);
 router.post("/login", validate(loginSchema), login);
+router.post("/refresh-token", refreshToken);
 router.post("/change-password", verifyToken, changePassword);
 router.post("/forgot-password", forgotPassword);
 router.post("/reset-password/:token", resetPassword);

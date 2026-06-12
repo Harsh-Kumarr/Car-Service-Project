@@ -5,7 +5,7 @@ import api from "../../services/api";
 import { MdOutlineReviews } from "react-icons/md";
 
 
-const Navbar = () => {
+const Navbar = ({ onMenuClick }) => {
   const navigate = useNavigate();
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [showReviewModal, setShowReviewModal] = useState(false);
@@ -98,27 +98,45 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="flex justify-between items-center px-8 py-4 bg-white/80 backdrop-blur-xl border-b border-gray-100 shadow-sm sticky top-0 z-40 transition-all duration-300">
-        <h1 className="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 tracking-tight flex items-center gap-2 cursor-pointer hover:scale-105 active:scale-95 transition-transform duration-200">
-          Smart Auto 
-        </h1>
-        
+      <div className="flex justify-between items-center px-4 md:px-8 py-4 bg-white/80 backdrop-blur-xl border-b border-gray-100 shadow-sm sticky top-0 z-30 transition-all duration-300">
         <div className="flex items-center gap-3">
+          {/* Hamburger Menu Toggle Button (hidden on desktop) */}
+          <button
+            onClick={onMenuClick}
+            className="md:hidden p-2 rounded-xl hover:bg-gray-100 text-gray-600 transition-colors"
+          >
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          
+          <h1 
+            onClick={() => {
+              if (user?.role === "admin") navigate("/admin/dashboard");
+              else if (user?.role === "mechanic") navigate("/mechanic/jobs");
+              else navigate("/dashboard");
+            }}
+            className="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 tracking-tight flex items-center gap-2 cursor-pointer hover:scale-105 active:scale-95 transition-transform duration-200"
+          >
+            Smart Auto 
+          </h1>
+        </div>
+        
+        <div className="flex items-center gap-2 md:gap-3">
           {/* ⭐ REVIEW BUTTON */}
           {user?.role === "user" && (
             <button
               onClick={() => setShowReviewModal(true)}
-              className="group relative inline-flex items-center gap-2 px-5 py-2 rounded-xl font-bold text-sm transition-all duration-200 hover:-translate-y-0.5 active:scale-95 shadow-sm border border-amber-200 bg-gradient-to-r from-amber-50 to-yellow-50 text-amber-700 hover:from-amber-100 hover:to-yellow-100 hover:shadow-md hover:shadow-amber-100/50"
+              className="group relative inline-flex items-center gap-1.5 md:gap-2 px-3 md:px-5 py-2 rounded-xl font-bold text-xs md:text-sm transition-all duration-200 hover:-translate-y-0.5 active:scale-95 shadow-sm border border-amber-200 bg-gradient-to-r from-amber-50 to-yellow-50 text-amber-700 hover:from-amber-100 hover:to-yellow-100 hover:shadow-md hover:shadow-amber-100/50"
             >
-              <span className="text-base transition-transform duration-300 group-hover:rotate-[20deg]"><MdOutlineReviews />
-</span>
+              <span className="text-sm md:text-base transition-transform duration-300 group-hover:rotate-[20deg]"><MdOutlineReviews /></span>
               Review
             </button>
           )}
 
           <button 
             onClick={() => setShowLogoutModal(true)} 
-            className="text-mauve-800 hover:text-white hover:bg-black font-bold px-5 py-2 rounded-xl transition-all duration-200 hover:-translate-y-0.5 active:scale-95 shadow-sm border border-red-100"
+            className="text-mauve-800 hover:text-white hover:bg-black font-bold px-3 md:px-5 py-2 rounded-xl transition-all duration-200 hover:-translate-y-0.5 active:scale-95 shadow-sm border border-red-100 text-xs md:text-sm"
           >
             Logout
           </button>

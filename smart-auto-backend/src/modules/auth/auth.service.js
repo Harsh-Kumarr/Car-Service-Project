@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 import { User } from "../../models/models.js";
-import { generateOTP, generateToken } from "./auth.utils.js";
+import { generateOTP, generateAccessToken, generateRefreshToken } from "./auth.utils.js";
 import { sendEmail } from "../../services/email.service.js";
 import AppError from "../../utils/AppError.js";
 import { otpTemplate } from "../../utils/emailTemplates.js";
@@ -76,16 +77,60 @@ class AuthService {
 
     if (!isMatch) throw new AppError("Invalid credentials", 401);
 
-    const token = generateToken(user);
+    const token = generateAccessToken(user);
+    const refreshToken = generateRefreshToken(user);
+
+    // Save refresh token in user document
+    user.refreshToken = refreshToken;
+    await user.save();
 
     return {
       token,
+      refreshToken,
       user: {
         id: user._id,
         name: user.name,
         role: user.role,
       },
     };
+  }
+
+  // REFRESH SESSION
+  async refreshSession(tokenToVerify) {
+    if (!tokenToVerify) {
+      throw new AppError("Refresh token is required", 400);
+    }
+
+    try {
+      const decoded = jwt.verify(tokenToVerify, process.env.JWT_SECRET);
+      
+      const user = await User.findById(decoded.id);
+      if (!user) {
+        throw new AppError("User not found", 404);
+      }
+
+      if (user.refreshToken !== tokenToVerify) {
+        throw new AppError("Invalid or expired session", 401);
+      }
+
+      const accessToken = generateAccessToken(user);
+      const newRefreshToken = generateRefreshToken(user);
+
+      user.refreshToken = newRefreshToken;
+      await user.save();
+
+      return {
+        token: accessToken,
+        refreshToken: newRefreshToken,
+        user: {
+          id: user._id,
+          name: user.name,
+          role: user.role,
+        },
+      };
+    } catch (err) {
+      throw new AppError("Session expired or invalid, please login again", 401);
+    }
   }
 }
 
