@@ -12,18 +12,18 @@ function App() {
       setLoading(false);
     }, 2500);
 
-    // LENIS 
-    const lenis = new Lenis({
-      duration: 1.2,
-      smooth: true,
-    });
+    // // LENIS 
+    // const lenis = new Lenis({
+    //   duration: 1.2,
+    //   smooth: true,
+    // });
 
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+    // function raf(time) {
+    //   lenis.raf(time);
+    //   requestAnimationFrame(raf);
+    // }
 
-    requestAnimationFrame(raf);
+    // requestAnimationFrame(raf);
 
     return () => clearTimeout(timer);
   }, []);
