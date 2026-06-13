@@ -77,7 +77,7 @@ const Register = () => {
                 name="name"
                 register={register}
                 errors={errors}
-                placeholder="Harish"
+                placeholder="Johny"
                 className="bg-slate-800/50 border-slate-700 text-white focus:ring-blue-500/50"
               />
 
