@@ -3,6 +3,11 @@ import { useState } from "react";
 import { updateJobStatus } from "../mechanicService";
 import toast from "react-hot-toast";
 import useMechanicStore from "../mechanicStore";
+import { BsCalendarDay } from "react-icons/bs";
+import { IoCarSportOutline } from "react-icons/io5";
+import { FaUser } from "react-icons/fa";
+import { BsTools } from "react-icons/bs";
+import { FaCheck } from "react-icons/fa";
 
 const STATUS_FLOW = ["accepted", "diagnosing", "repairing", "testing", "completed"];
 
@@ -59,23 +64,24 @@ const JobDetails = () => {
     <div className="max-w-2xl mx-auto space-y-6">
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">Job Details 🔧</h2>
+          <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight flex items-center gap-1 justify-center">Job Details <BsTools /></h2>
           <p className="text-gray-500 mt-1">View job information and update the repair status.</p>
         </div>
 
         {/* VEHICLE INFO */}
         <div className="bg-gray-50 rounded-xl p-5 mb-6">
           <div className="flex items-center gap-3">
-            <span className="text-2xl">🚗</span>
+            <span className="flex items-center gap-1"><IoCarSportOutline />
+            </span>
             <div>
               <p className="font-bold text-gray-900">{job.vehicleId?.brand} {job.vehicleId?.model}</p>
-              <p className="text-sm text-gray-500">👤 {job.userId?.name}</p>
             </div>
+              <p className="text-sm text-gray-500 flex items-center gap-1"> <FaUser /> {job.userId?.name}</p>
           </div>
-          <p className="text-sm text-gray-600 mt-3">🛠 {job.serviceType}</p>
+          <p className="text-sm text-gray-600 mt-3 flex items-center gap-1"><BsTools /> {job.serviceType}</p>
           {job.createdAt && (
             <p className="text-xs text-gray-400 mt-2">
-              📅 Booked on: {new Date(job.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+              <span className="flex items-center gap-1"><BsCalendarDay /> Booked on: {new Date(job.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}</span>
             </p>
           )}
         </div>
@@ -98,7 +104,8 @@ const JobDetails = () => {
         {/* COMPLETED MESSAGE */}
         {isCompleted ? (
           <div className="bg-green-50 border border-green-200 rounded-xl p-5 text-center">
-            <span className="text-3xl block mb-2">✅</span>
+            <span className="text-3xl block mb-2"><FaCheck />
+            </span>
             <p className="text-green-700 font-bold text-lg">Job Completed</p>
             <p className="text-green-600 text-sm mt-1">This service has been marked as completed. No further updates are needed.</p>
           </div>

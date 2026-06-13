@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import useMechanicStore from "../mechanicStore";
 import { Link } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
+import { IoCarSportOutline } from "react-icons/io5";
+import { BsCalendarDay } from "react-icons/bs";
+import { BsTools } from "react-icons/bs";
 
 const statusConfig = {
   accepted: { bg: "bg-blue-100", text: "text-blue-700" },
@@ -34,29 +38,29 @@ const MechanicJobs = () => {
       >
         <div className="flex justify-between items-start mb-3">
           <div>
-            <h3 className="text-lg font-bold text-gray-900">
-              🚗 {job.vehicleId?.brand} {job.vehicleId?.model}
+            <h3 className="text-lg font-bold text-gray-900 flex items-center gap-1">
+              <IoCarSportOutline /> {job.vehicleId?.brand} {job.vehicleId?.model}
             </h3>
-            <p className="text-sm text-gray-500">👤 {job.userId?.name}</p>
+            <p className="text-sm text-gray-500 flex items-center gap-1"> <FaUser /> {job.userId?.name}</p>
           </div>
           <span className={`px-3 py-1 rounded-full text-xs font-bold capitalize ${sc.bg} ${sc.text}`}>
             {job.status}
           </span>
         </div>
 
-        <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-xl mb-3">🛠 {job.serviceType}</p>
+        <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-xl mb-3 flex items-center gap-1"><BsTools /> {job.serviceType}</p>
 
         {/* BOOKING DATE */}
         {job.createdAt && (
-          <p className="text-xs text-gray-400 font-medium mb-4">
-            📅 Booked: {new Date(job.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+          <p className="text-xs text-gray-400 font-medium mb-4 flex items-center gap-1">
+             <BsCalendarDay /> Booked: {new Date(job.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
           </p>
         )}
 
         {isCompleted ? (
           <div className="flex items-center justify-between">
             <span className="inline-flex items-center gap-1.5 text-green-600 font-semibold text-sm">
-              ✅ Service Completed
+              Service Completed
             </span>
             {job.updatedAt && (
               <span className="text-xs text-gray-400 font-medium">
@@ -80,7 +84,7 @@ const MechanicJobs = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">Assigned Jobs 🔧</h2>
+        <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">Assigned Jobs < span className="inline-flex items-center gap-1 "><BsTools /></ span></h2>
         <p className="text-gray-500 mt-1">View and manage all jobs assigned to you.</p>
       </div>
 

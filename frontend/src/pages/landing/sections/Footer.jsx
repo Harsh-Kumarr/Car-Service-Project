@@ -52,10 +52,17 @@ const Footer = () => {
               Artificial Intelligence and master craftsmanship.
             </p>
             <div className="flex gap-4">
-              {[FaInstagram, FaXTwitter, FaLinkedinIn, FaGithub].map((Icon, i) => (
+              {[
+                { Icon: FaInstagram, href: "https://www.instagram.com/harsh__kumarr__/" },
+                { Icon: FaXTwitter, href: "#" },
+                { Icon: FaLinkedinIn, href: "https://www.linkedin.com/in/harsh-kumar-98142025a/" },
+                { Icon: FaGithub, href: "https://github.com/Harsh-Kumarr" },
+              ].map(({ Icon, href }, i) => (
                 <a
                   key={i}
-                  href="#"
+                  href={href}
+                  target={href !== "#" ? "_blank" : undefined}
+                  rel={href !== "#" ? "noopener noreferrer" : undefined}
                   className="p-3 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-blue-400 hover:border-blue-400/50 hover:bg-blue-400/5 transition-all duration-300"
                 >
                   <Icon size={18} />
@@ -91,8 +98,8 @@ const Footer = () => {
             <div className="col-span-2 md:col-span-1">
               <h4 className="text-white font-bold text-xs uppercase tracking-[0.3em] mb-8">Headquarters</h4>
               <p className="text-sm leading-7 text-gray-500 italic">
-                Sector 17, Intelligence Hub,<br />
-                Chandigarh, Punjab 160017<br />
+                Sector 27, Intelligence Hub,<br />
+                Chandigarh, Punjab 160019<br />
                 <span className="text-blue-400 mt-2 block font-mono">harshhkumarr0@gmail.com</span>
               </p>
             </div>
