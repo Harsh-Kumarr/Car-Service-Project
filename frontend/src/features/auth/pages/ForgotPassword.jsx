@@ -2,6 +2,7 @@ import { useState } from "react";
 import { forgotPassword } from "../authService";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { CiLock } from "react-icons/ci";
 
 // Standardizing with your UI components for consistency
 import Input from "../../../components/ui/Input"; 
@@ -52,7 +53,8 @@ const ForgotPassword = () => {
           {/* HEADER */}
           <div className="text-center mb-10">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-500/10 border border-orange-500/20 mb-4 text-2xl">
-              🔒
+              <CiLock />
+
             </div>
             <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-white to-slate-400 tracking-tight mb-2">
               Reset Password

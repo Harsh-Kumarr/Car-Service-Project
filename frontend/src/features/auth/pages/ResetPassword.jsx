@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { resetPassword } from "../authService";
 import toast from "react-hot-toast";
+import { CiLock } from "react-icons/ci";
 
 const ResetPassword = () => {
   const { token } = useParams();
@@ -46,8 +47,9 @@ const ResetPassword = () => {
         
         <div className="relative bg-slate-900/60 backdrop-blur-2xl border border-white/10 p-8 sm:p-10 rounded-3xl shadow-2xl">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-white to-slate-400 tracking-tight mb-2">
-              Reset Password 🔑
+            <h2 className="text-3xl flex justify-center items-center gap-2 font-bold bg-clip-text text-transparent bg-gradient-to-br from-white to-slate-400 tracking-tight mb-2">
+              Reset Password <CiLock />
+
             </h2>
             <p className="text-slate-400 text-sm font-light">
               Enter your new password below

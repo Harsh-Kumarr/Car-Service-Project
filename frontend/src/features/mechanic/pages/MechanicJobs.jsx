@@ -91,7 +91,7 @@ const MechanicJobs = () => {
       {/* ACTIVE JOBS */}
       {activeJobs.length === 0 ? (
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-12 text-center">
-          <span className="text-5xl mb-4 block">🔧</span>
+          <span className="flex justify-center text-3xl p-2"><BsTools/></span>
           <p className="text-gray-500 font-medium">No active jobs right now. Check back later!</p>
         </div>
       ) : (
