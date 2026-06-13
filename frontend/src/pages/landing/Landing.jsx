@@ -13,7 +13,7 @@ const Landing = () => {
       <ServicesSection />
       <AiSection />
       <TestimonialsSection />
-      <PricingSection />
+      {/* <PricingSection /> */}
       <AppPromoSection />
       <Footer />
     </div>
