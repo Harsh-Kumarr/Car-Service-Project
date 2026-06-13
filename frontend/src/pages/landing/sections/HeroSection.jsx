@@ -4,8 +4,6 @@ import { motion } from "framer-motion";
 const HeroSection = () => {
   return (
     <section className="relative h-screen w-full overflow-hidden bg-black font-[Poppins]">
-
-      {/* --- BACKGROUND LAYER --- */}
       <motion.div
         initial={{ scale: 1.1 }}
         animate={{ scale: 1 }}
@@ -17,28 +15,21 @@ const HeroSection = () => {
           alt="Car"
           className="w-full h-full object-cover opacity-90"
         />
-        {/* Symmetric Dark Overlays for Centered Text readability */}
         <div className="absolute inset-0 bg-black/60" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-[#0A0F1C]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.15),transparent_60%)]" />
       </motion.div>
 
-      {/* --- TECH/AI OVERLAY EFFECTS --- */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Animated Scanning Line */}
         <motion.div
           animate={{ top: ['0%', '100%', '0%'] }}
           transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
           className="absolute left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/30 to-transparent z-20"
         />
       </div>
-
-      {/* --- CONTENT LAYER --- */}
       <div className="relative z-10 h-full flex items-center justify-center px-4 md:px-8">
 
         <div className="max-w-3xl text-center mx-auto">
-
-          {/* Animated Headline */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -54,8 +45,6 @@ const HeroSection = () => {
               </span>
             </h1>
           </motion.div>
-
-          {/* Animated Description */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -66,8 +55,6 @@ const HeroSection = () => {
             Automate your maintenance, predict repairs, and optimize
             performance with a single tap.
           </motion.p>
-
-          {/* Animated CTA Area */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -96,8 +83,6 @@ const HeroSection = () => {
 
         </div>
       </div>
-
-      {/* --- BOTTOM DECORATION --- */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center hidden md:flex">
         <div className="h-16 w-[1px] bg-gradient-to-b from-transparent to-white/20" />
         <p className="text-[9px] text-gray-500 tracking-[0.6em] mt-3 uppercase">

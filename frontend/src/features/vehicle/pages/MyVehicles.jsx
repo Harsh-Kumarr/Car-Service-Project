@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import useVehicleStore from "../vehicleStore";
 import { IoCarSportOutline } from "react-icons/io5";
 
-
 const MyVehicles = () => {
   const vehicles = useVehicleStore((state) => state.vehicles);
   const fetchVehicles = useVehicleStore((state) => state.fetchVehicles);

@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import useVehicleStore from "../vehicleStore";
 import { useNavigate } from "react-router-dom";
 import { IoCarSportOutline } from "react-icons/io5";
+import { FaUser } from "react-icons/fa";
 
 
 const AddVehicle = () => {
@@ -63,7 +64,7 @@ const AddVehicle = () => {
           {/* OWNER DETAILS */}
           <div>
             <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-sm">👤</span>
+              <span className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-sm"><FaUser /></span>
               Owner Details
             </h3>
             <div className="grid md:grid-cols-2 gap-4">

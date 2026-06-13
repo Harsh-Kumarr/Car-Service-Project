@@ -3,6 +3,7 @@ import { getMyBookings } from "../bookingService";
 import { Link } from "react-router-dom";
 import { BsCalendarDay } from "react-icons/bs";
 import { PiMailboxFill } from "react-icons/pi";
+import { MdOutlinePayments } from "react-icons/md";
 
 
 const statusColor = (status) => {
@@ -100,9 +101,9 @@ const MyBookings = () => {
                 {b.status === "completed" && b.paymentStatus !== "paid" && (
                   <Link
                     to={`/invoice/${b._id}`}
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-5 py-2 rounded-xl shadow-sm transition-all active:scale-95 hover:-translate-y-0.5"
+                    className="bg-emerald-600 inline-flex items-center gap-2 hover:bg-emerald-700 text-white text-sm font-semibold px-5 py-2 rounded-xl shadow-sm transition-all active:scale-95 hover:-translate-y-0.5"
                   >
-                    💳 Pay Now
+                    <MdOutlinePayments /> Pay Now
                   </Link>
                 )}
 

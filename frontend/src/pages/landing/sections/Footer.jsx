@@ -7,22 +7,18 @@ const Footer = () => {
 
   return (
     <footer className="relative w-full bg-black text-gray-400 overflow-hidden pt-20">
-      
-      {/* --- BACKGROUND IMAGE LAYER --- */}
       <div className="absolute inset-0 z-0">
         <img 
           src="/sunder.jpg" 
           alt="Car Background" 
           className="w-full h-full object-cover opacity-60 grayscale-[0.5]"
         />
-        {/* Gradient Overlays for Readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black" />
         <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black opacity-80" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10">
-        
-        {/* --- FLOATING CTA (HUD STYLE) --- */}
+
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -45,11 +41,8 @@ const Footer = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </Link>
         </motion.div>
-
-        {/* --- MAIN NAVIGATION GRID --- */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 pb-16">
           
-          {/* BRANDING COLUMN */}
           <div className="lg:col-span-4 flex flex-col items-start">
             <h1 className="text-3xl font-black text-white tracking-tighter mb-6">
               AUTO<span className="text-blue-500">AI</span>
@@ -58,7 +51,6 @@ const Footer = () => {
               Engineering the future of automotive reliability through 
               Artificial Intelligence and master craftsmanship.
             </p>
-            {/* SOCIALS */}
             <div className="flex gap-4">
               {[FaInstagram, FaXTwitter, FaLinkedinIn, FaGithub].map((Icon, i) => (
                 <a
@@ -71,8 +63,6 @@ const Footer = () => {
               ))}
             </div>
           </div>
-
-          {/* LINKS COLUMNS */}
           <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-12">
             <div>
               <h4 className="text-white font-bold text-xs uppercase tracking-[0.3em] mb-8">Navigation</h4>
@@ -108,8 +98,6 @@ const Footer = () => {
             </div>
           </div>
         </div>
-
-        {/* --- COPYRIGHT BAR --- */}
         <div className="border-t border-white/10 py-10 flex flex-col md:flex-row items-center justify-between text-[11px] font-mono uppercase tracking-widest text-gray-600">
           <p>© {currentYear} AutoAI Automotive Dynamics</p>
           <div className="flex gap-8">

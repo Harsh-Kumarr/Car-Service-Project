@@ -36,15 +36,12 @@ const AdminDashboard = () => {
         </h2>
         <p className="text-gray-500 mt-1">Analytics overview of all bookings and revenue.</p>
       </div>
-
-      {/* STAT CARDS */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
         {statCards.map((s, i) => (
           <StatCard key={i} title={s.title} value={s.value} icon={s.icon} color={s.color} />
         ))}
       </div>
 
-      {/* CHARTS */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
           <h3 className="text-lg font-bold text-gray-900 mb-4">Revenue Trend</h3>

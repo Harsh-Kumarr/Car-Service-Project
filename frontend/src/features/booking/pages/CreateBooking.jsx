@@ -6,54 +6,23 @@ import useVehicleStore from "../../vehicle/vehicleStore";
 import Button from "../../../components/ui/Button";
 import toast from "react-hot-toast";
 import { BsTools } from "react-icons/bs";
+import { BsCalendarDay } from "react-icons/bs";
+
 
 const SERVICE_TYPES = [
-  {
-    category: "Maintenance",
-    services: [
-      { value: "Oil Change", desc: "Engine oil & filter replacement" },
-      { value: "Full Service", desc: "Complete multi-point inspection & servicing" },
-      { value: "Battery Replacement", desc: "Battery testing & replacement" },
-      { value: "Tyre Rotation & Balancing", desc: "Rotate, balance & align tyres" },
-      { value: "Coolant Flush", desc: "Cooling system flush & refill" },
-    ],
-  },
-  {
-    category: "Climate & Comfort",
-    services: [
-      { value: "AC Service", desc: "AC gas refill, cooling check & vent cleaning" },
-      { value: "Heater Repair", desc: "Heater core, blower motor & thermostat fix" },
-    ],
-  },
-  {
-    category: "Engine & Drivetrain",
-    services: [
-      { value: "Engine Repair", desc: "Engine diagnostics, rebuild & part replacement" },
-      { value: "Transmission Service", desc: "Gearbox fluid change, clutch & shifting repair" },
-      { value: "Timing Belt Replacement", desc: "Belt/chain inspection & replacement" },
-    ],
-  },
-  {
-    category: "Brakes & Suspension",
-    services: [
-      { value: "Brake Service", desc: "Brake pads, rotors, fluid & line inspection" },
-      { value: "Suspension Repair", desc: "Shocks, struts, bushings & alignment" },
-    ],
-  },
-  {
-    category: "Electrical & Diagnostics",
-    services: [
-      { value: "Diagnostics", desc: "OBD-II scan, fault code analysis & troubleshooting" },
-      { value: "Electrical Repair", desc: "Wiring, fuse, alternator & starter motor fixes" },
-    ],
-  },
-  {
-    category: "Body & Exterior",
-    services: [
-      { value: "Denting & Painting", desc: "Dent removal, scratch repair & full repaint" },
-      { value: "Windshield Replacement", desc: "Cracked or chipped windshield replacement" },
-    ],
-  },
+  "Regular Service",
+  "Car Wash",
+  "AC Service",
+  "Oil Change",
+  "Tyre Service",
+  "Battery Replacement",
+  "Brake Service",
+  "Engine Repair",
+  "Electrical Repair",
+  "Denting & Painting",
+  "Windshield Replacement",
+  "Roadside Assistance",
+  "Other"
 ];
 
 const TIME_SLOTS = [
@@ -86,7 +55,6 @@ const CreateBooking = () => {
   const navigate = useNavigate();
   const vehicles = useVehicleStore((state) => state.vehicles);
   const fetchVehicles = useVehicleStore((state) => state.fetchVehicles);
-  const [selectedService, setSelectedService] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState("");
   const [calendarMonth, setCalendarMonth] = useState(new Date().getMonth());
@@ -97,17 +65,6 @@ const CreateBooking = () => {
   useEffect(() => {
     fetchVehicles();
   }, []);
-
-  useEffect(() => {
-    if (watchedService) {
-      const found = SERVICE_TYPES
-        .flatMap((cat) => cat.services)
-        .find((s) => s.value === watchedService);
-      setSelectedService(found || null);
-    } else {
-      setSelectedService(null);
-    }
-  }, [watchedService]);
 
   // Calendar logic
   const today = new Date();
@@ -191,6 +148,15 @@ const CreateBooking = () => {
       toast.error("Please select a date and time slot");
       return;
     }
+    if (data.serviceType === "Other") {
+      if (!data.otherService || !data.otherService.trim()) {
+        toast.error("Please specify the service type");
+        return;
+      }
+      data.serviceType = data.otherService.trim();
+    }
+    delete data.otherService;
+
     const toastId = toast.loading("Creating booking...");
     try {
       await createBooking(data);
@@ -213,7 +179,7 @@ const CreateBooking = () => {
           {/* VEHICLE SELECT */}
           <div>
             <label className="block mb-1.5 text-sm font-medium text-gray-700">Select Vehicle</label>
-            <select {...register("vehicleId")} className="w-full bg-gray-50 border border-gray-200 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+            <select {...register("vehicleId")} className="w-full bg-gray-50 border border-gray-200 p-3 rounded-xl focus:outline-none transition-all">
               <option value="">Choose a vehicle</option>
               {vehicles.map((v) => (
                 <option key={v._id} value={v._id}>
@@ -223,37 +189,34 @@ const CreateBooking = () => {
             </select>
           </div>
 
-          {/* SERVICE TYPE — GROUPED DROPDOWN */}
+          {/* SERVICE TYPE — DROPDOWN */}
           <div>
             <label className="block mb-1.5 text-sm font-medium text-gray-700">Service Type</label>
             <select
               {...register("serviceType")}
-              className="w-full bg-gray-50 border border-gray-200 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+              className="w-full bg-gray-50 border border-gray-200 p-3 rounded-xl focus:outline-none transition-all"
             >
               <option value="">Choose a service</option>
-              {SERVICE_TYPES.map((cat) => (
-                <optgroup key={cat.category} label={cat.category}>
-                  {cat.services.map((s) => (
-                    <option key={s.value} value={s.value}>
-                      {s.value}
-                    </option>
-                  ))}
-                </optgroup>
+              {SERVICE_TYPES.map((s) => (
+                <option key={s} value={s}>
+                  {s}
+                </option>
               ))}
             </select>
 
-            {selectedService && (
-              <div className="mt-2.5 flex items-start gap-3 bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 transition-all" style={{ animation: "fadeSlideIn 0.25s ease-out" }}>
-                <span className="text-blue-500 mt-0.5 text-lg">ℹ️</span>
-                <div>
-                  <p className="text-sm font-bold text-blue-800">{selectedService.value}</p>
-                  <p className="text-xs text-blue-600 mt-0.5">{selectedService.desc}</p>
-                </div>
+            {watchedService === "Other" && (
+              <div className="mt-3.5" style={{ animation: "fadeSlideIn 0.25s ease-out" }}>
+                <label className="block mb-1.5 text-sm font-medium text-gray-700">Please specify</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Wheel alignment, suspension upgrade..."
+                  {...register("otherService")}
+                  className="w-full bg-gray-50 border border-gray-200 p-3 rounded-xl focus:outline-none focus:ring-2  transition-all"
+                />
               </div>
             )}
           </div>
 
-          {/* 📅 SCHEDULE — DATE & TIME */}
           <div>
             <label className="block mb-2 text-sm font-medium text-gray-700">Schedule Date & Time</label>
 
@@ -334,7 +297,7 @@ const CreateBooking = () => {
             {/* SELECTED DATE DISPLAY */}
             {selectedDate && (
               <div className="mt-3 flex items-center gap-2 text-sm font-semibold text-blue-700 bg-blue-50 border border-blue-100 px-4 py-2 rounded-xl" style={{ animation: "fadeSlideIn 0.25s ease-out" }}>
-                <span>📅</span>
+                <span><BsCalendarDay /></span>
                 {selectedDate.toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
               </div>
             )}
@@ -364,10 +327,9 @@ const CreateBooking = () => {
               </div>
             )}
 
-            {/* FINAL SUMMARY */}
             {selectedDate && selectedTime && (
               <div className="mt-3 flex items-center gap-3 bg-green-50 border border-green-100 rounded-xl px-4 py-3" style={{ animation: "fadeSlideIn 0.25s ease-out" }}>
-                <span className="text-lg">✅</span>
+                <span className="text-lg"></span>
                 <div>
                   <p className="text-sm font-bold text-green-800">
                     {selectedDate.toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short" })} at {selectedTime}
@@ -388,7 +350,7 @@ const CreateBooking = () => {
             <textarea
               placeholder="Tell us more about your vehicle's issue..."
               {...register("issueDescription")}
-              className="w-full bg-gray-50 border border-gray-200 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all resize-none h-32"
+              className="w-full bg-gray-50 border border-gray-200 p-3 rounded-xl focus:outline-none transition-all resize-none h-32"
             />
           </div>
 

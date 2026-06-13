@@ -85,7 +85,6 @@ const AllBookings = () => {
 
       <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-xl mb-3 flex items-center gap-2"><BsTools /> {b.serviceType}</p>
 
-      {/* SCHEDULED APPOINTMENT */}
       {b.scheduledDate && (
         <div className="flex items-center gap-2 mb-3 bg-indigo-50 border border-indigo-100 rounded-xl px-3 py-2">
           <span className="text-sm"><BsCalendarDay /></span>

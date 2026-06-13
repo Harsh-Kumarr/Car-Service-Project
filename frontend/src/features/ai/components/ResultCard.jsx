@@ -1,3 +1,5 @@
+import { CiCircleCheck } from "react-icons/ci";
+
 const ResultCard = ({ result }) => {
   if (!result) return null;
 
@@ -5,7 +7,8 @@ const ResultCard = ({ result }) => {
     <div className="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-2xl border border-indigo-100 p-6 shadow-sm">
       <div className="flex items-center gap-3 mb-5">
         <div className="bg-indigo-100 p-2 rounded-lg">
-          <span className="text-indigo-600 text-xl flex justify-center w-6 h-6 items-center font-bold">✓</span>
+          <span className="text-indigo-600 text-xl flex justify-center w-6 h-6 items-center font-bold"><CiCircleCheck />
+</span>
         </div>
         <h3 className="text-xl font-bold text-gray-900">Diagnosis Result</h3>
       </div>

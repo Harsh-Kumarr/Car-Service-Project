@@ -7,12 +7,12 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 🔥 LOADER TIMER
+    // LOADER TIMER
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2500);
 
-    // 🔥 LENIS INIT
+    // LENIS 
     const lenis = new Lenis({
       duration: 1.2,
       smooth: true,

@@ -45,8 +45,6 @@ const ServicesSection = () => {
   return (
     <section className="py-24 px-6 bg-[#050810]" id="services">
       <div className="max-w-7xl mx-auto">
-        
-        {/* HEADER */}
         <div className="mb-20">
           <motion.span 
             initial={{ opacity: 0 }}
@@ -65,7 +63,6 @@ const ServicesSection = () => {
           </motion.h2>
         </div>
 
-        {/* SERVICES GRID */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((s, i) => (
             <motion.div
@@ -76,7 +73,6 @@ const ServicesSection = () => {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="group relative bg-white/[0.02] border border-white/10 rounded-[2rem] overflow-hidden hover:bg-white/[0.04] transition-all duration-500"
             >
-              {/* IMAGE SECTION */}
               <div className="relative h-64 overflow-hidden p-4">
                 <div className="relative h-full w-full overflow-hidden rounded-[1.5rem]">
                    <img 
@@ -84,7 +80,6 @@ const ServicesSection = () => {
                     alt={s.title} 
                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out scale-110 group-hover:scale-100"
                   />
-                  {/* Tech Overlay Effect */}
                   <div className="absolute inset-0 bg-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md p-2.5 rounded-xl border border-white/10 text-blue-400">
                     {s.icon}
@@ -92,7 +87,6 @@ const ServicesSection = () => {
                 </div>
               </div>
               
-              {/* CONTENT SECTION */}
               <div className="px-8 pb-8">
                 <div className="flex items-center gap-2 mb-3">
                     <div className="w-8 h-[1px] bg-blue-500 group-hover:w-12 transition-all duration-500" />
@@ -101,14 +95,10 @@ const ServicesSection = () => {
                 <p className="text-gray-400 text-sm leading-relaxed group-hover:text-gray-300 transition-colors">
                   {s.desc}
                 </p>
-                
-                {/* EXPLORE LINK */}
                 <div className="mt-6 flex items-center gap-2 text-xs font-bold text-blue-500 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
                   Configure Service <span>→</span>
                 </div>
               </div>
-
-              {/* BORDER GLOW HOVER */}
               <div className="absolute inset-0 border-2 border-transparent group-hover:border-blue-500/30 rounded-[2rem] pointer-events-none transition-colors duration-500" />
             </motion.div>
           ))}

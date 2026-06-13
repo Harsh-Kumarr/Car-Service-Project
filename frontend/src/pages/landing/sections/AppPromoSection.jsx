@@ -5,7 +5,6 @@ import { IoLogoGooglePlaystore } from "react-icons/io5";
 const AppPromoSection = () => {
   return (
     <section className="py-28 px-6 md:px-10 bg-[#0A0F1C] text-white text-center relative overflow-hidden font-sans">
-      {/* Decorative Blobs */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[400px] h-[400px] bg-blue-600/30 rounded-full mix-blend-screen blur-[120px] pointer-events-none"></div>
       <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[400px] h-[400px] bg-indigo-600/30 rounded-full mix-blend-screen blur-[120px] pointer-events-none"></div>
 

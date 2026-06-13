@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../../../services/api";
 
-// Fallback testimonials (shown when no API reviews or alongside)
 const fallbackTestimonials = [
   {
     name: "Rahul Sharma",
@@ -69,12 +68,10 @@ const TestimonialsSection = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  // Show max 6 reviews
   const displayReviews = reviews.slice(0, 6);
 
   return (
     <section className="py-24 px-6 md:px-10 bg-gray-50 font-sans relative overflow-hidden">
-      {/* Decorative Blobs */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply blur-[80px] opacity-40"></div>
       <div className="absolute bottom-0 left-0 w-48 h-48 bg-amber-200 rounded-full mix-blend-multiply blur-[60px] opacity-30"></div>
       
@@ -126,12 +123,9 @@ const TestimonialsSection = () => {
                 className="p-8 bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300 relative group"
                 style={{ animationDelay: `${i * 100}ms` }}
               >
-                {/* Quote mark */}
                 <div className="absolute -top-4 -right-2 text-6xl text-gray-100 font-serif group-hover:text-blue-50 transition-colors">
                   "
                 </div>
-
-                {/* Live badge */}
                 {t.isReal && (
                   <div className="absolute top-4 right-4">
                     <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">

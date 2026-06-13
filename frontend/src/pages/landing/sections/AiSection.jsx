@@ -23,8 +23,6 @@ const AiSection = () => {
   return (
     <section className="py-24 px-6 md:px-10 bg-white relative overflow-hidden font-sans" id="ai">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
-        
-        {/* LEFT (FORM & RESULTS) */}
         <div className="lg:w-1/2 w-full z-10 relative">
           <div className="mb-10">
             <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
@@ -62,8 +60,6 @@ const AiSection = () => {
               )}
             </button>
           </div>
-
-          {/* RESULT CARD */}
           {result && (
             <div className="bg-gradient-to-br from-indigo-50 to-blue-50 p-8 rounded-3xl border border-indigo-100 shadow-sm animate-fade-in-up">
               <div className="flex items-center gap-3 mb-4">
@@ -96,10 +92,7 @@ const AiSection = () => {
             </div>
           )}
         </div>
-
-        {/* RIGHT (FLOATING IMAGE) */}
         <div className="lg:w-1/2 w-full relative hidden lg:block group">
-          {/* Decorative Blobs */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-blue-100 rounded-full mix-blend-multiply blur-[80px] opacity-70"></div>
           <div className="absolute top-1/4 right-0 w-[300px] h-[300px] bg-indigo-100 rounded-full mix-blend-multiply blur-[80px] opacity-70"></div>
 
