@@ -17,10 +17,8 @@ const LandingNavbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // 1. Handle background transition
       setScrolled(window.scrollY > 50);
 
-      // 2. Calculate scroll progress percentage
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolledPercent = (winScroll / height) * 100;
@@ -41,12 +39,11 @@ const LandingNavbar = () => {
           relative pointer-events-auto flex items-center justify-between transition-all duration-500 ease-in-out
           ${isOpen ? "overflow-visible" : "overflow-hidden"}
           ${scrolled 
-            ? "w-full max-w-5xl rounded-2xl bg-[#0A0F1C]/80 backdrop-blur-xl border border-white/10 px-8 py-3 shadow-[0_20px_50px_rgba(0,0,0,0.5)]" 
-            : "w-full max-w-7xl rounded-none bg-transparent px-10 py-5 border-transparent"
+            ? "w-full max-w-5xl rounded-2xl bg-[#0A0F1C]/80 backdrop-blur-xl border border-white/10 px-4 sm:px-8 py-3 shadow-[0_20px_50px_rgba(0,0,0,0.5)]" 
+            : "w-full max-w-7xl rounded-none bg-transparent px-4 sm:px-10 py-4 sm:py-5 border-transparent"
           }
         `}
       >
-        {/* --- LOGO --- */}
         <Link to="/" className="group flex items-center gap-2">
           <div className=" p-1.5 rounded-lg group-hover:rotate-12 transition-transform duration-300">
             <div className="w-10 h-10"> <img src="/logo.png" alt="" /></div>
@@ -81,22 +78,21 @@ const LandingNavbar = () => {
           ))}
         </div>
 
-        {/* --- ACTIONS --- */}
         <div className="flex items-center gap-3">
           <Link
-            to="/login"
-            className="hidden sm:block text-sm font-medium text-gray-300 hover:text-white px-4 py-2 transition-colors"
+            to="/register"
+            className="hidden sm:block text-sm font-medium text-gray-300 hover:text-white px-4 py-2 transition-colors pointer-events-auto"
           >
-            Log in
+            Register
           </Link>
 
           <Link
-            to="/register"
-            className="relative group overflow-hidden bg-white text-black px-6 py-2.5 rounded-xl font-semibold text-sm transition-all active:scale-95 shadow-lg shadow-white/5"
+            to="/login"
+            className="relative group overflow-hidden bg-white text-black px-6 py-2.5 rounded-xl font-semibold text-sm transition-all active:scale-95 shadow-lg shadow-white/5 pointer-events-auto"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <span className="relative z-10 group-hover:text-white transition-colors duration-300">
-              Get Started
+              Login
             </span>
           </Link>
 
@@ -135,14 +131,20 @@ const LandingNavbar = () => {
             <Link
               to="/login"
               onClick={() => setIsOpen(false)}
-              className="text-gray-300 hover:text-white text-sm font-semibold transition-colors py-2"
+              className="text-gray-300 hover:text-white text-sm font-semibold transition-colors py-2 border-b border-white/5"
             >
               Log in
+            </Link>
+            <Link
+              to="/register"
+              onClick={() => setIsOpen(false)}
+              className="text-gray-300 hover:text-white text-sm font-semibold transition-colors py-2"
+            >
+              Register
             </Link>
           </motion.div>
         )}
 
-        {/* --- REAL-TIME PROGRESS BAR --- */}
         <div className="absolute bottom-0 left-0 w-full h-[2px] bg-white/5">
           <motion.div 
             className="h-full bg-gradient-to-r from-blue-500 via-indigo-400 to-blue-500"

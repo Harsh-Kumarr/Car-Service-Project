@@ -25,7 +25,6 @@ const Navbar = ({ onMenuClick }) => {
     navigate("/", { replace: true });
   };
 
-  // Fetch user's existing review when modal opens
   useEffect(() => {
     if (showReviewModal) {
       api.get("/reviews/my").then((res) => {

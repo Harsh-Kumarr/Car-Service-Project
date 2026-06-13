@@ -26,7 +26,6 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
   return (
     <>
-      {/* Mobile Sidebar Overlay */}
       {isOpen && (
         <div 
           onClick={() => setIsOpen(false)}
@@ -34,7 +33,6 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         />
       )}
 
-      {/* Sidebar Container */}
       <div className={`fixed inset-y-0 left-0 w-64 h-screen bg-[#0A0F1C] text-white p-6 border-r border-white/5 flex flex-col shadow-2xl z-50 transition-transform duration-300 ease-in-out md:translate-x-0 md:sticky md:top-0 ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       }`}>
@@ -45,7 +43,6 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
               AutoAI 
             </p>
           </div>
-          {/* Close Menu Button on Mobile */}
           <button 
             onClick={() => setIsOpen(false)}
             className="md:hidden w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-gray-400 hover:text-white transition-colors"
@@ -55,7 +52,6 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         </div>
 
         <ul className="space-y-2 flex-1">
-          {/* USER */}
           {user?.role === "user" && (
             <>
               <NavLink to="/dashboard">Dashboard</NavLink>
@@ -67,7 +63,6 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
             </>
           )}
 
-          {/* ADMIN */}
           {user?.role === "admin" && (
             <>
               <NavLink to="/admin/dashboard">Admin Overview</NavLink>
@@ -78,7 +73,6 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
             </>
           )}
 
-          {/* MECHANIC */}
           {user?.role === "mechanic" && (
             <>
               <NavLink to="/mechanic/jobs">My Jobs</NavLink>
@@ -86,7 +80,6 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
           )}
         </ul>
         
-        {/* USER PROFILE SNIPPET AT BOTTOM */}
         <div className="mt-auto pt-6 border-t border-white/10 flex items-center gap-3 group cursor-pointer p-2 rounded-xl hover:bg-white/5 transition-colors">
           <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex flex-shrink-0 items-center justify-center text-white font-bold shadow-lg group-hover:scale-105 transition-transform">
             {user?.name?.charAt(0).toUpperCase() || "U"}
