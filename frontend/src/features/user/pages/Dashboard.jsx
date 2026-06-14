@@ -221,7 +221,7 @@ const Dashboard = () => {
                     )}
                     {b.paymentStatus === "paid" && (
                       <span className="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1.5 rounded-full inline-flex items-center gap-1">
-                        ✓ Payment Completed
+                        Payment Completed
                       </span>
                     )}
                   </div>
@@ -229,7 +229,7 @@ const Dashboard = () => {
                   {/* ASSIGNED MECHANIC */}
                   {b.assignedMechanic && (
                     <span className="text-xs text-gray-500 bg-gray-100 px-3 py-1.5 rounded-full font-medium flex items-center gap-1.5">
-                      🔧 {b.assignedMechanic.name || "Mechanic Assigned"}
+                      <BsTools /> {b.assignedMechanic.name || "Mechanic Assigned"}
                     </span>
                   )}
                 </div>
@@ -288,9 +288,8 @@ const MechanicUpdates = ({
       accepted: <FaCheck />,
       diagnosing: <MdPendingActions />,
       repairing: <BsTools />,
-      testing: <LuTestTubeDiagonal />
-,
-      completed: "🏁",
+      testing: <LuTestTubeDiagonal />,
+      completed: <FaCheck />,
     };
     return map[status] || "📝";
   };
@@ -338,7 +337,7 @@ const MechanicUpdates = ({
                       <span className="text-gray-400 font-normal ml-2">— {b.serviceType}</span>
                     </p>
                     <p className="text-xs text-gray-500 mt-0.5 flex items-center gap-1.5">
-                      🔧 {mechanic?.name || "Mechanic"}
+                      <BsTools/> {mechanic?.name || "Mechanic"}
                       <span className={`ml-2 px-2 py-0.5 rounded-full text-[10px] font-bold capitalize ${statusColor(b.status)}`}>
                         {b.status}
                       </span>
