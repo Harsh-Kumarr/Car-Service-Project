@@ -11,15 +11,18 @@ import Button from "../../../components/ui/Button";
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const [linkSent, setLinkSent] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     if (e) e.preventDefault(); // Prevent default if wrapped in form
     const toastId = toast.loading("Sending reset link...");
     setLoading(true);
+    setLinkSent(false);
     try {
       await forgotPassword({ email });
       toast.success("Recovery link sent! Check your inbox.", { id: toastId });
+      setLinkSent(true);
     } catch (err) {
       toast.error("Could not find an account with that email", { id: toastId });
     } finally {
@@ -30,18 +33,8 @@ const ForgotPassword = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#0A0F1C] relative overflow-hidden font-sans px-4 text-slate-200">
       
-      {/* Dark Grid Background */}
-      <div 
-        className="absolute inset-0 bg-[#0A0F1C] pointer-events-none" 
-        style={{ 
-          backgroundImage: `
-            linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), 
-            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)
-          `,
-          backgroundSize: '40px 40px',
-          backgroundPosition: 'center'
-        }}
-      />
+      {/* Glow Backdrop Bubble */}
+      <div className="absolute w-80 h-80 rounded-full bg-blue-500/10 blur-[100px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
       {/* --- RECOVERY CARD --- */}
       <div className="w-full max-w-md relative group z-10">
@@ -52,9 +45,8 @@ const ForgotPassword = () => {
           
           {/* HEADER */}
           <div className="text-center mb-10">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-500/10 border border-orange-500/20 mb-4 text-2xl">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-500/10 border border-blue-500/20 mb-4 text-2xl text-blue-400">
               <CiLock />
-
             </div>
             <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-white to-slate-400 tracking-tight mb-2">
               Reset Password
@@ -75,7 +67,7 @@ const ForgotPassword = () => {
                 placeholder="name@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-slate-800/50 border border-slate-700 p-4 rounded-xl text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-500/40 focus:border-orange-500/50 transition-all"
+                className="w-full bg-slate-800/50 border border-slate-700 p-4 rounded-xl text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500/50 transition-all"
               />
             </div>
 
@@ -83,7 +75,7 @@ const ForgotPassword = () => {
             <button
               onClick={handleSubmit}
               disabled={loading || !email}
-              className="w-full relative overflow-hidden group/btn bg-gradient-to-r from-orange-600 to-rose-700 hover:from-orange-500 hover:to-rose-600 text-white font-bold py-4 rounded-xl shadow-[0_0_20px_rgba(249,115,22,0.2)] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed h-[56px]"
+              className="w-full relative overflow-hidden group/btn bg-[#BDDDFC] hover:bg-[#6A89A7] text-black font-bold py-4 rounded-xl shadow-[0_0_20px_rgba(189,221,252,0.25)] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed h-[56px]"
             >
               <span className="relative z-10 flex items-center justify-center gap-2">
                 {loading ? (
@@ -94,12 +86,12 @@ const ForgotPassword = () => {
                     </svg>
                     Sending...
                   </>
+                ) : linkSent ? (
+                  "Link Sent"
                 ) : (
                   "Send Recovery Link"
                 )}
               </span>
-              {/* Shine effect */}
-              <div className="absolute inset-0 w-full h-full bg-white/10 -skew-x-12 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></div>
             </button>
           </div>
 
@@ -110,7 +102,7 @@ const ForgotPassword = () => {
               <button
                 type="button"
                 onClick={() => navigate("/login")}
-                className="text-orange-400 hover:text-orange-300 font-semibold transition-colors underline underline-offset-4"
+                className="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors underline underline-offset-4"
               >
                 Back to Login
               </button>

@@ -38,18 +38,8 @@ const Register = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#0A0F1C] relative overflow-hidden font-sans py-12 px-4 text-slate-200">
       
-      {/* Dark Grid Background */}
-      <div 
-        className="absolute inset-0 bg-[#0A0F1C] pointer-events-none" 
-        style={{ 
-          backgroundImage: `
-            linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), 
-            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)
-          `,
-          backgroundSize: '40px 40px',
-          backgroundPosition: 'center'
-        }}
-      />
+      {/* Glow Backdrop Bubble */}
+      <div className="absolute w-80 h-80 rounded-full bg-blue-500/10 blur-[100px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
       {/* --- REGISTER CARD --- */}
       <div className="w-full max-w-md relative group z-10">
@@ -124,7 +114,7 @@ const Register = () => {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full relative overflow-hidden group/btn bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-500 hover:to-indigo-600 text-white font-bold py-4 rounded-xl shadow-[0_0_20px_rgba(37,99,235,0.3)] transition-all duration-300 disabled:opacity-50 h-[56px]"
+                className="w-full relative overflow-hidden group/btn bg-[#BDDDFC] hover:bg-[#6A89A7] text-black font-bold py-4 rounded-xl shadow-[0_0_20px_rgba(189,221,252,0.25)] transition-all duration-300 disabled:opacity-50 h-[56px]"
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   {isSubmitting ? (
@@ -139,8 +129,6 @@ const Register = () => {
                     "Register"
                   )}
                 </span>
-                {/* Interactive Shine Effect */}
-                <div className="absolute inset-0 w-full h-full bg-white/10 -skew-x-12 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></div>
               </Button>
             </div>
 
@@ -151,7 +139,7 @@ const Register = () => {
                 <button
                   type="button"
                   onClick={() => navigate("/login")}
-                  className="text-blue-400 hover:text-blue-300 font-semibold transition-colors underline underline-offset-4"
+                  className="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors underline underline-offset-4"
                 >
                   Login here
                 </button>
