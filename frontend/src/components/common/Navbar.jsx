@@ -117,12 +117,12 @@ const Navbar = ({ onMenuClick }) => {
             }}
             className="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 tracking-tight flex items-center gap-2 cursor-pointer hover:scale-105 active:scale-95 transition-transform duration-200"
           >
-            Smart Auto 
+            AutoAI 
           </h1>
         </div>
         
         <div className="flex items-center gap-2 md:gap-3">
-          {/* ⭐ REVIEW BUTTON */}
+          {/* REVIEW BUTTON */}
           {user?.role === "user" && (
             <button
               onClick={() => setShowReviewModal(true)}

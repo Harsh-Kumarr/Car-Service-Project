@@ -6,6 +6,10 @@ import { IoCarSportOutline } from "react-icons/io5";
 import { BsTools, BsCalendarDay, BsDatabaseSlash, BsChatLeftTextFill, BsTelephoneFill } from "react-icons/bs";
 import { MdExpandMore, MdExpandLess } from "react-icons/md";
 import { MdOutlinePayments } from "react-icons/md";
+import { FaPhoneAlt } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa6";
+import { MdPendingActions } from "react-icons/md";
+import { LuTestTubeDiagonal } from "react-icons/lu";
 
 
 
@@ -280,11 +284,12 @@ const MechanicUpdates = ({
 
   const statusIcon = (status) => {
     const map = {
-      pending: "📋",
-      accepted: "✅",
-      diagnosing: "🔍",
-      repairing: "🔧",
-      testing: "🧪",
+      pending: <MdPendingActions />,
+      accepted: <FaCheck />,
+      diagnosing: <MdPendingActions />,
+      repairing: <BsTools />,
+      testing: <LuTestTubeDiagonal />
+,
       completed: "🏁",
     };
     return map[status] || "📝";
@@ -359,7 +364,8 @@ const MechanicUpdates = ({
                     </button>
                     {phoneVisible && (
                       <span className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-50 border border-gray-200 text-sm font-bold text-gray-800" style={{ animation: "fadeSlideIn 0.2s ease-out" }}>
-                        📞 {mechanic?.phone || "Phone not available"}
+                        <FaPhoneAlt />
+ {mechanic?.phone || "Phone not available"}
                       </span>
                     )}
                   </div>
