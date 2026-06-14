@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { IoCarSportOutline } from "react-icons/io5";
 import { BsTools, BsCalendarDay, BsDatabaseSlash, BsChatLeftTextFill, BsTelephoneFill } from "react-icons/bs";
 import { MdExpandMore, MdExpandLess } from "react-icons/md";
+import { MdOutlinePayments } from "react-icons/md";
 
 
 
@@ -209,9 +210,9 @@ const Dashboard = () => {
                     {b.status === "completed" && b.paymentStatus !== "paid" && (
                       <Link
                         to={`/invoice/${b._id}`}
-                        className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-4 py-1.5 rounded-lg shadow-sm transition-all active:scale-95 hover:-translate-y-0.5"
+                        className="bg-emerald-600 flex items-center gap-1 hover:bg-emerald-700 text-white text-xs font-semibold px-4 py-1.5 rounded-lg shadow-sm transition-all active:scale-95 hover:-translate-y-0.5"
                       >
-                        💳 Pay Now
+                        <MdOutlinePayments /> Pay Now
                       </Link>
                     )}
                     {b.paymentStatus === "paid" && (

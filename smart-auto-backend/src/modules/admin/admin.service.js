@@ -1,4 +1,4 @@
-import { Booking, User, Invoice } from "../../models/models.js";
+import { Booking, User, Invoice, Vehicle } from "../../models/models.js";
 import AppError from "../../utils/AppError.js";
 import bookingService from "../booking/booking.service.js";
 import { sendEmail } from "../../services/email.service.js";
@@ -140,6 +140,23 @@ class AdminService {
             { $limit: 5 },
         ]);
 
+        // 📊 NEW: Users Stats
+        const totalUsers = await User.countDocuments({ role: "user" });
+
+        const users = await User.find({ role: "user" }).select("name email phone").lean();
+        const usersList = await Promise.all(
+            users.map(async (u) => {
+                const carCount = await Vehicle.countDocuments({ userId: u._id });
+                return {
+                    _id: u._id,
+                    name: u.name,
+                    email: u.email,
+                    phone: u.phone || "N/A",
+                    totalCars: carCount,
+                };
+            })
+        );
+
         // ✅ RETURN (EXTENDED)
         return {
             totalBookings,
@@ -147,6 +164,8 @@ class AdminService {
             pending,
             totalRevenue,   // 🔥 added
             topIssues: issues, // 🔥 added
+            totalUsers,
+            usersList,
         };
     }
 }

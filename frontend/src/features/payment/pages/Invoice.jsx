@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { createOrder, verifyPayment } from "../paymentService";
 import toast from "react-hot-toast";
+import { MdOutlinePayments } from "react-icons/md";
 
 const Invoice = ({ bookingId: propBookingId, amount = 5000 }) => {
   const { bookingId: paramBookingId } = useParams();
@@ -42,7 +43,7 @@ const Invoice = ({ bookingId: propBookingId, amount = 5000 }) => {
     <div className="max-w-md mx-auto mt-10">
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
         <div className="text-center mb-8">
-          <div className="w-16 h-16 rounded-2xl bg-emerald-50 flex items-center justify-center text-3xl mx-auto mb-4">💳</div>
+          <div className="w-16 h-16 rounded-2xl bg-emerald-50 flex items-center justify-center text-3xl mx-auto mb-4"><MdOutlinePayments /></div>
           <h2 className="text-2xl font-extrabold text-gray-900">Invoice</h2>
           <p className="text-gray-500 mt-1">Review and complete your payment</p>
         </div>

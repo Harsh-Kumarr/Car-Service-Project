@@ -5,7 +5,6 @@ import {
   rejectBooking,
 } from "../adminService";
 import AssignModal from "./AssignModal";
-import toast from "react-hot-toast";
 import { BsTools } from "react-icons/bs";
 import { BsCalendarDay } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
@@ -16,6 +15,7 @@ const AllBookings = () => {
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [showOld, setShowOld] = useState(false);
   const [filter, setFilter] = useState("week");
+  const [processing, setProcessing] = useState({}); // { [bookingId]: 'accept' | 'reject' }
 
   const fetchBookings = async () => {
     const res = await getAllBookings();
@@ -46,14 +46,35 @@ const AllBookings = () => {
   if (filter === "all") filteredOld = bookings;
 
   const handleAccept = async (id) => {
-    await acceptBooking(id);
-    toast.success("Accepted");
-    fetchBookings();
+    setProcessing((prev) => ({ ...prev, [id]: "accept" }));
+    try {
+      await acceptBooking(id);
+      await fetchBookings();
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setProcessing((prev) => {
+        const next = { ...prev };
+        delete next[id];
+        return next;
+      });
+    }
   };
+
   const handleReject = async (id) => {
-    await rejectBooking(id);
-    toast.success("Rejected");
-    fetchBookings();
+    setProcessing((prev) => ({ ...prev, [id]: "reject" }));
+    try {
+      await rejectBooking(id);
+      await fetchBookings();
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setProcessing((prev) => {
+        const next = { ...prev };
+        delete next[id];
+        return next;
+      });
+    }
   };
 
   const statusColor = (status) => {
@@ -66,78 +87,109 @@ const AllBookings = () => {
     return map[status] || "bg-gray-100 text-gray-700";
   };
 
-  const renderBooking = (b) => (
-    <div
-      key={b._id}
-      className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-all"
-    >
-      <div className="flex justify-between items-start mb-3">
-        <div>
-          <h3 className="text-lg font-bold text-gray-900">
-            {b.vehicleId?.brand} {b.vehicleId?.model}
-          </h3>
-          <p className="text-sm text-gray-500 flex items-center gap-2" ><FaUser /> {b.userId?.name}</p>
+  const renderBooking = (b) => {
+    const isAccepting = processing[b._id] === "accept";
+    const isRejecting = processing[b._id] === "reject";
+
+    return (
+      <div
+        key={b._id}
+        className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-all"
+      >
+        <div className="flex justify-between items-start mb-3">
+          <div>
+            <h3 className="text-lg font-bold text-gray-900">
+              {b.vehicleId?.brand} {b.vehicleId?.model}
+            </h3>
+            <p className="text-sm text-gray-500 flex items-center gap-2" ><FaUser /> {b.userId?.name}</p>
+          </div>
+          <span className={`px-3 py-1 rounded-full text-xs font-bold capitalize ${statusColor(b.status)}`}>
+            {b.status}
+          </span>
         </div>
-        <span className={`px-3 py-1 rounded-full text-xs font-bold capitalize ${statusColor(b.status)}`}>
-          {b.status}
-        </span>
-      </div>
 
-      <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-xl mb-3 flex items-center gap-2"><BsTools /> {b.serviceType}</p>
+        <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-xl mb-3 flex items-center gap-2"><BsTools /> {b.serviceType}</p>
 
-      {b.scheduledDate && (
-        <div className="flex items-center gap-2 mb-3 bg-indigo-50 border border-indigo-100 rounded-xl px-3 py-2">
-          <span className="text-sm"><BsCalendarDay /></span>
-          <p className="text-xs font-bold text-indigo-800">
-            {new Date(b.scheduledDate).toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short", year: "numeric" })}
-            {b.scheduledTime && <span className="ml-1 text-indigo-600">at {b.scheduledTime}</span>}
-          </p>
+        {b.scheduledDate && (
+          <div className="flex items-center gap-2 mb-3 bg-indigo-50 border border-indigo-100 rounded-xl px-3 py-2">
+            <span className="text-sm"><BsCalendarDay /></span>
+            <p className="text-xs font-bold text-indigo-800">
+              {new Date(b.scheduledDate).toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short", year: "numeric" })}
+              {b.scheduledTime && <span className="ml-1 text-indigo-600">at {b.scheduledTime}</span>}
+            </p>
+          </div>
+        )}
+
+        <p className="text-xs text-gray-400 font-medium mb-4">
+          Booked on {new Date(b.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+        </p>
+
+        <div className="flex gap-2 flex-wrap">
+          <button
+            onClick={() => handleAccept(b._id)}
+            disabled={b.status !== "pending" || isAccepting || isRejecting}
+            className={`px-4 py-2 text-sm rounded-xl font-semibold transition-all active:scale-95 flex items-center gap-2 ${
+              b.status === "pending" && !isAccepting && !isRejecting
+                ? "bg-emerald-500 hover:bg-emerald-600 text-white shadow-sm"
+                : "bg-emerald-50 text-emerald-400 cursor-not-allowed"
+            }`}
+          >
+            {isAccepting ? (
+              <>
+                <svg className="animate-spin h-4 w-4 text-emerald-400" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+                Accepting...
+              </>
+            ) : b.status === "accepted" ? (
+              "Accepted"
+            ) : (
+              "Accept"
+            )}
+          </button>
+
+          <button
+            onClick={() => handleReject(b._id)}
+            disabled={b.status !== "pending" || isAccepting || isRejecting}
+            className={`px-4 py-2 text-sm rounded-xl font-semibold transition-all active:scale-95 flex items-center gap-2 ${
+              b.status === "pending" && !isAccepting && !isRejecting
+                ? "bg-red-500 hover:bg-red-600 text-white shadow-sm"
+                : "bg-red-50 text-red-300 cursor-not-allowed"
+            }`}
+          >
+            {isRejecting ? (
+              <>
+                <svg className="animate-spin h-4 w-4 text-red-300" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+                Rejecting...
+              </>
+            ) : b.status === "rejected" ? (
+              "Rejected"
+            ) : (
+              "Reject"
+            )}
+          </button>
+
+          <button
+            onClick={() => setSelectedBooking(b._id)}
+            disabled={b.assignedMechanic || b.status !== "accepted" || isAccepting || isRejecting}
+            className={`px-4 py-2 text-sm rounded-xl font-semibold transition-all active:scale-95 ${
+              b.assignedMechanic
+                ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                : b.status !== "accepted" || isAccepting || isRejecting
+                ? "bg-blue-50 text-blue-300 cursor-not-allowed"
+                : "bg-blue-500 hover:bg-blue-600 text-white shadow-sm"
+            }`}
+          >
+            {b.assignedMechanic ? "Assigned" : "Assign"}
+          </button>
         </div>
-      )}
-
-      <p className="text-xs text-gray-400 font-medium mb-4">
-        Booked on {new Date(b.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
-      </p>
-
-      <div className="flex gap-2 flex-wrap">
-        <button
-          onClick={() => handleAccept(b._id)}
-          disabled={b.status !== "pending"}
-          className={`px-4 py-2 text-sm rounded-xl font-semibold transition-all active:scale-95 ${
-            b.status === "pending"
-              ? "bg-emerald-500 hover:bg-emerald-600 text-white shadow-sm"
-              : "bg-emerald-50 text-emerald-400 cursor-not-allowed"
-          }`}
-        >
-          {b.status === "accepted" ? "✓ Accepted" : "Accept"}
-        </button>
-
-        <button
-          onClick={() => handleReject(b._id)}
-          disabled={b.status !== "pending"}
-          className={`px-4 py-2 text-sm rounded-xl font-semibold transition-all active:scale-95 ${
-            b.status === "pending"
-              ? "bg-red-500 hover:bg-red-600 text-white shadow-sm"
-              : "bg-red-50 text-red-300 cursor-not-allowed"
-          }`}
-        >
-          {b.status === "rejected" ? "✗ Rejected" : "Reject"}
-        </button>
-
-        <button
-          onClick={() => setSelectedBooking(b._id)}
-          disabled={b.assignedMechanic || b.status !== "accepted"}
-          className={`px-4 py-2 text-sm rounded-xl font-semibold transition-all active:scale-95 ${
-            b.assignedMechanic
-              ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-              : "bg-blue-500 hover:bg-blue-600 text-white shadow-sm"
-          }`}
-        >
-          {b.assignedMechanic ? "✓ Assigned" : "Assign"}
-        </button>
       </div>
-    </div>
-  );
+    );
+  };
 
   const filterBtns = [
     { label: "Prev Week", val: "week" },

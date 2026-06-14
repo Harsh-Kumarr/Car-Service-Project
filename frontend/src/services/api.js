@@ -1,8 +1,12 @@
 import axios from "axios";
 import useAuthStore from "../features/auth/authStore";
 
+const BASE_URL = import.meta.env.DEV
+  ? "http://localhost:5000/api"
+  : "https://car-service-project-theta.vercel.app/api";
+
 const api = axios.create({
-  baseURL: "https://car-service-project-theta.vercel.app/api",
+  baseURL: BASE_URL,
 });
 
 api.interceptors.request.use((config) => {
@@ -50,7 +54,7 @@ api.interceptors.response.use(
       if (refreshToken) {
         try {
           const res = await axios.post(
-            "https://car-service-project-theta.vercel.app/api/auth/refresh-token",
+            `${BASE_URL}/auth/refresh-token`,
             { refreshToken }
           );
 

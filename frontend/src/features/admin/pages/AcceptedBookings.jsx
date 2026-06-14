@@ -52,7 +52,7 @@ const AcceptedBookings = () => {
               : "bg-blue-500 hover:bg-blue-600 text-white shadow-sm"
           }`}
         >
-          {b.assignedMechanic ? "✓ Assigned" : "Assign Mechanic"}
+          {b.assignedMechanic ? "Assigned" : "Assign Mechanic"}
         </button>
       </div>
     </div>
