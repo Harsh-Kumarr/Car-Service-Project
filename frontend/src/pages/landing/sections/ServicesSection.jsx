@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from "framer-motion";
 import { Wrench, Paintbrush, Wind, Gauge, Sparkles, Binary } from "lucide-react"; // Optional: npm install lucide-react
+import { useNavigate } from "react-router-dom";
+import useAuthStore from "../../../features/auth/authStore";
 
 const services = [
   {
@@ -42,6 +44,17 @@ const services = [
 ];
 
 const ServicesSection = () => {
+  const navigate = useNavigate();
+  const user = useAuthStore((state) => state.user);
+
+  const handleCardClick = () => {
+    if (user) {
+      navigate("/create-booking");
+    } else {
+      navigate("/login");
+    }
+  };
+
   return (
     <section className="py-24 px-6 bg-[#050810]" id="services">
       <div className="max-w-7xl mx-auto">
@@ -71,7 +84,8 @@ const ServicesSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group relative bg-white/[0.02] border border-white/10 rounded-[2rem] overflow-hidden hover:bg-white/[0.04] transition-all duration-500"
+              onClick={handleCardClick}
+              className="group relative bg-white/[0.02] border border-white/10 rounded-[2rem] overflow-hidden hover:bg-white/[0.04] transition-all duration-500 cursor-pointer"
             >
               <div className="relative h-64 overflow-hidden p-4">
                 <div className="relative h-full w-full overflow-hidden rounded-[1.5rem]">
